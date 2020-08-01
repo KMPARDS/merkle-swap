@@ -71,7 +71,7 @@ export class TokenExchange extends Component<State> {
                 </div>
 
                 {/* Bootstrap Modal */}
-                <Modal show={this.state.showModal} onHide={this.handleClose} className="date-modal-container" >
+                <Modal  show={this.state.showModal} onHide={this.handleClose} className="date-modal-container" >
 
                     <Modal.Body >
                         <div className="exchange-box-wht-modal">
