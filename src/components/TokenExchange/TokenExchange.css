@@ -13,7 +13,10 @@
     border-color: #a7a7a7;
     border-radius: 8px;
     margin-bottom: 8px;
-    width: 80px;
+    width: 112px;
+    height: 33px;
+    font-weight: 500;
+    padding-top: 3px;
 }
 
 .er-value{
@@ -84,6 +87,11 @@
     border-color: #a7a7a7;
     border-radius: 8px;
     margin-bottom: 8px;
+    border: 1px solid #80808099;
+    width: 65%;
+    margin-left: 30px;
+    height: 38px;
+    border-radius: 10px;
 }
 
 .prf-md-txt{
@@ -101,4 +109,11 @@
     color: #ffffff;
     text-align: center;
     border-color: #a7a7a7;
+    margin-top: 10px;
+    width: 86px;
+    height: 31px;
+}
+
+.modal-content{
+    top: 200px;
 }

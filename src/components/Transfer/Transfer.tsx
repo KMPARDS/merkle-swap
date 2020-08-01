@@ -68,7 +68,6 @@ export class Transfer extends Component<State> {
                     </div>
                       {/* Bootstrap Modal */}
                 <Modal show={this.state.showModal} onHide={this.handleClose} className="date-modal-container" >
-
 <Modal.Body >
     <div className="exchange-box-wht-modal">
         <div className="exchange-container">
@@ -91,7 +90,7 @@ export class Transfer extends Component<State> {
 
 <Modal show={this.state.proofModal} onHide={this.handleClose} className="date-modal-container" >
 
-<Modal.Body >
+<Modal.Body>
     <div className="exchange-box-wht-modal">
         <div className="exchange-container">
             <h3 className="main-prf">YOUR PROOF IS GENERATED</h3>
@@ -107,14 +106,13 @@ export class Transfer extends Component<State> {
 
 <Modal show={this.state.depositModal} onHide={this.handleClose} className="date-modal-container" >
 
-<Modal.Body >
+<Modal.Body>
     <div className="exchange-box-wht-modal">
         <div className="exchange-container">
             <h3 className="main-prf">YOUR DEPOSIT IS DONE </h3>
             <p className="prf-md-txt">YOUR UPDATED ERASWAP NETWORK BALANCE-5000 ES. </p>
             <div className="exc-btn-box">
                 <button className="tr-pn-btn-modal" onClick={() => this.setState({ depositModal: false })}>DONE</button>
-               
             </div>
             <div className="exc-btn-box">
             <button className="tr-pn-btn-modal">Proceed to main screen</button>

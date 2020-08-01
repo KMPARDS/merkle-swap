@@ -34,8 +34,22 @@ a{
     text-underline-position: unset;
 }
 
+.bnch-link{
+    color:#80808099;
+    font-weight: 500;
+}
+
+
+.bnch-link:hover{
+    color:#80808099 !important;
+}
+
 a:hover{
     color: #000000 !important;
+}
+
+.prcd-btn:hover{
+color: #ffffff !important;
 }
 
 .prcd-btn{
@@ -49,6 +63,16 @@ a:hover{
     padding-right: 14px;
     padding-top: 5px;
     padding-bottom: 5px;
+}
+
+.bunch-btn{
+    background-color: #b95866;
+    color: #ffffff;
+    text-align: center;
+    margin: 10px;
+    width: 112px;
+    height: 32px;
+    border-radius: 6px;
 }
 
 .frst-link{
@@ -69,5 +93,60 @@ a:hover{
 
 .bunch-btn-flex{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+.modal-content{
+    top: 200px;
+}
+
+.bunch-hd-txt{
+    color:#80808099;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.bunch-dropdown-center{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.gen-bunch-center{
+  
+    display: flex;
+    justify-content: center;
+    border: 2px solid #80808099;
+    width: 90%;
+    margin-left: 30px;
+    height: 38px;
+    border-radius: 10px;
+    padding-top: 6px;
+}
+
+.bunch-border.custom-select{
+    border: 2px solid #80808099;
+    width: 395px;
+    margin-left: 13px;
+    height: 38px;
+    border-radius: 10px;
+    padding-top: 6px;
+    text-align: center;
+}
+
+option{
+    width: 389px;
+    text-align: center;
+}
+
+.main-genBunch-btn{
+    border: 1px solid #80808099;
+    width: 90%;
+    margin-left: 30px;
+    height: 38px;
+    border-radius: 10px;
+    padding-top: 1px;
+    background-color: #b95866;
+    color: #ffffff;
 }

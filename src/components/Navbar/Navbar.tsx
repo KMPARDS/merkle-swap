@@ -11,6 +11,7 @@ export class NavbarMain extends Component{
   render() {
     return (
       <div>
+        <div className="navbar-padding">
         <Navbar collapseOnSelect expand="lg" bg="white" >
           <Navbar.Brand href="/"><img className="asset-logo" src="./images/eralogo.png" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -25,6 +26,7 @@ export class NavbarMain extends Component{
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+        </div>
       </div>
 
     );
