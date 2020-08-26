@@ -24,7 +24,7 @@ export class Home extends Component<State> {
         <div className="bridge-bgd">
           <div className="wrapper-container">
             <div className="container">
-              <div className="row  align-items-center justify-content-center text-center">
+              <div className="row  align-items-center justify-content-center text-center mt80">
                 <div className="col-lg-10 align-self-end">
                   <h1 className="text-uppercase text-white font-weight-bold">
                     Eraswap Token Bridge
@@ -40,11 +40,15 @@ export class Home extends Component<State> {
                     to="/token-exchange"
                     className="btn btn-primary btn-xl js-scroll-trigger prcd-btn"
                   >
-                    Proceed to Token exchange
+                    Token exchange
                   </Link>
 
                   <button className="btn btn-primary btn-xl js-scroll-trigger prcd-btn">
-                    Proceed to Bunch Submission
+                     Bunch Submission 
+                  </button>
+                  
+                  <button className="btn btn-primary btn-xl js-scroll-trigger prcd-btn">
+                      Get Era Swap Native Token
                   </button>
                 </div>
 

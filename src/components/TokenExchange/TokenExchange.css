@@ -2,18 +2,19 @@
   background-color: #ffffff;
   width: 45%;
   margin: 0 auto;
-  padding: 10px;
+  padding: 0px;
   border-radius: 10px;
 }
 
 .tr-pn-btn {
-  background-color: #b95866;
+  background-color: #dd3c45;
   color: #ffffff;
   text-align: center;
   border-color: #a7a7a7;
   border-radius: 8px;
   margin-bottom: 8px;
-  width: 80px;
+  padding: 0 15px;
+  line-height: 25px;
 }
 
 .er-value {
@@ -23,7 +24,7 @@
 }
 
 .sm-exch-txt {
-  color: #a7a7a7;
+  color: #535353;
   font-size: 14px;
   margin-top: 5px;
   margin-bottom: 0px;
@@ -78,7 +79,7 @@
 }
 
 .tr-pn-btn-modal {
-  background-color: #b95866;
+  background-color: #dd3c45;
   color: #ffffff;
   text-align: center;
   border-color: #a7a7a7;
@@ -97,7 +98,7 @@
 }
 
 .submit-modal {
-  background-color: #b95866;
+  background-color: #dd3c45;
   color: #ffffff;
   text-align: center;
   border-color: #a7a7a7;
