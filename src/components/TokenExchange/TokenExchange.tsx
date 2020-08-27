@@ -29,46 +29,49 @@ export class TokenExchange extends Component<State> {
     return (
       <div>
         <div className="bridge-bgd">
-          <div className="wrapper-container">
-            <h1>Eraswap Token Bridge</h1>
+          <div className="wrapper-container mt80">
+          <h1 className="text-uppercase text-white font-weight-bold">
+          Eraswap Token Bridge
+                  </h1>
+            
             <h5>Transfer Tokens between Ethereum's Main network, and Eraswap network</h5>
-            <div className="exchange-box-wht">
+            <div className="exchange-box-wht mt40 arrow-bg-right ">
               <div className="exchange-container">
-                <div className="row">
-                  <div className="col-md-4 pinside40">
-                    <span className="er-value">
-                      <p className="main-er-txt">Eraswap</p>
-                      <p className="sm-exch-txt">(ERC20)</p>
-                    </span>
-                    <p className="es-p-margin">0.0 ES</p>
+                <div className="row pinside40">
+                  <div className="col-md-4 text-center">
+                   
+                      <p className="main-er-txt">Eraswap  <span className="sm-exch-txt">(ERC20)</span></p>
+                     
+                  
+                    <p className="font-weight-bold">0.0 ES</p>
                   </div>
 
-                  <div className="col-md-4 pinside40">
+                  <div className="col-md-4 text-center">
                     <div className="input-group">
                       <input type="text" className="form-control" />
                       <div className="input-group-append">
                         <span className="input-group-text bgd-color">ES</span>
                       </div>
                     </div>
-                    <div className="exc-btn-box">
+                    <div className="exc-btn-box ">
                       <button
                         className="tr-pn-btn"
                         onClick={() => this.setState({ showModal: true })}
                       >
                         {' '}
-                        Transfer
+                        TRANSFER
                       </button>
                     </div>
                     <div className="exc-btn-box">
                       <Link to="/transfer" className="tr-pn-btn">
                         {' '}
-                        Reverse
+                        REVERSE
                       </Link>
                     </div>
                   </div>
 
-                  <div className="col-md-4 pinside40">
-                    <p className="es-p">0.0 ES</p>
+                  <div className="col-md-4 text-center">
+                    <p className="font-weight-bold">0.0 ES</p>
                   </div>
                 </div>
               </div>
@@ -84,7 +87,7 @@ export class TokenExchange extends Component<State> {
         >
           <Modal.Body>
             <div className="exchange-box-wht-modal">
-              <div className="exchange-container">
+              <div className="exchange-container mt20 mb20">
                 <h3 className="main-prf"> GENERATE PROOF</h3>
                 <h3 className="main-prf">Please wait proof is generating</h3>
                 <div className="input-group">
@@ -95,7 +98,7 @@ export class TokenExchange extends Component<State> {
                 </div>
                 <div className="exc-btn-box">
                   <button
-                    className="tr-pn-btn-modal"
+                    className="tr-pn-btn-modal tr-pn-btn"
                     onClick={() => this.setState({ showModal: false, proofModal: true })}
                   >
                     COPY AND PROCEED
@@ -114,7 +117,7 @@ export class TokenExchange extends Component<State> {
         >
           <Modal.Body>
             <div className="exchange-box-wht-modal">
-              <div className="exchange-container">
+              <div className="exchange-container mt20 mb20">
                 <h3 className="main-prf">YOUR PROOF IS GENERATED</h3>
                 <p className="prf-md-txt">
                   {' '}
@@ -123,10 +126,10 @@ export class TokenExchange extends Component<State> {
                 </p>
                 <div className="exc-btn-box">
                   <button
-                    className="submit-modal"
+                    className="tr-pn-btn"
                     onClick={() => this.setState({ proofModal: false, depositModal: true })}
                   >
-                    Submit
+                    SUBMIT
                   </button>
                 </div>
               </div>
@@ -142,19 +145,19 @@ export class TokenExchange extends Component<State> {
         >
           <Modal.Body>
             <div className="exchange-box-wht-modal">
-              <div className="exchange-container">
+              <div className="eexchange-container mt20 mb20">
                 <h3 className="main-prf">YOUR DEPOSIT IS DONE </h3>
                 <p className="prf-md-txt">YOUR UPDATED ERASWAP NETWORK BALANCE-5000 ES. </p>
                 <div className="exc-btn-box">
                   <button
-                    className="tr-pn-btn-modal"
+                    className="tr-pn-btn"
                     onClick={() => this.setState({ depositModal: false })}
                   >
                     DONE
                   </button>
                 </div>
                 <div className="exc-btn-box">
-                  <button className="tr-pn-btn-modal">Proceed to main screen</button>
+                  <button className="tr-pn-btn">Proceed to main screen</button>
                 </div>
               </div>
             </div>
