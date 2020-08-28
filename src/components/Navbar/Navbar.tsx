@@ -25,13 +25,24 @@ export class NavbarMain extends Component {
               </Nav>
              
               <Nav>
-                <Nav.Link href="/esb-to-es" className=" pdr20 ">
+              <Nav.Link href="#deets">
+                <img className="event-img" src="./images/plusevent.png" /> EVENT
+              </Nav.Link>
+              <Nav.Link href="#deets">
+                <img className="stat-img" src="./images/bar-chart.png" />
+                STATS
+              </Nav.Link>
+              <Nav.Link className="" href="#deets">
+                <img className="event-img" src="./images/stats.png" />
+                STATISTICS
+              </Nav.Link>
+              <Nav.Link href="/esb-to-es" className=" pdr20 ">
                 <img className="wallet-img" src="./images/tap.png" />  ESB to ES Na
                 </Nav.Link>
-               
+           
                <Nav.Link className="btn btn-primary btn-color text-white" href="">
                 <img className="wallet-img" src="./images/wallet-white.png" />
-                  0xdb9e4bfe51b22lkjbn
+                Login with wallet
               </Nav.Link> 
               </Nav>
             </Navbar.Collapse>
