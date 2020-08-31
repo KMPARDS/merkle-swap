@@ -351,4 +351,21 @@ Padding space
     margin: 0 auto;
     padding: 0;
   }
+.login-btn{
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
   
+.modal.show .modal-dialog {
+  margin-top: 110px;
+}
+@media only screen and (max-width: 768px) {
+  .arrow-bg-left::before {
+    width: 260px;
+    height: 310px;
+  }
+  .arrow-bg-right::before {
+    width: 260px;
+    height: 310px;
+  }
+}

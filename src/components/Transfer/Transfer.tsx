@@ -37,16 +37,13 @@ export class Transfer extends Component<State> {
             <h5>Transfer Tokens between Ethereum's Main network, and Eraswap network</h5>
             <div className="exchange-box-wht transfer-ht mt40 arrow-bg-left">
               <div className="exchange-container">
-                <div className="row">
-                  <div className="col-md-4 pinside40">
-                    <span className="er-value">
-                      <p className="main-er-txt">Eraswap</p>
-                      <p className="sm-exch-txt">(Native)</p>
-                    </span>
-                    <p className="es-p-margin">0.0 ES</p>
+                <div className="row pinside40">
+                  <div className="col-md-4 text-center">
+                     <p className="main-er-txt">Eraswap <span className="sm-exch-txt">Native</span></p>
+                     <p className="font-weight-bold">0.0 ES</p>
                   </div>
 
-                  <div className="col-md-4 pinside40">
+                  <div className="col-md-4 text-center">
                     <div className="input-group">
                       <input type="text" className="form-control" />
                       <div className="input-group-append">
@@ -64,12 +61,9 @@ export class Transfer extends Component<State> {
                     </div>
                   </div>
 
-                  <div className="col-md-4 pinside40">
-                    <span className="er-value2">
-                      <p className="main-er-txt">Eraswap</p>
-                      <p className="sm-exch-txt2">(ERC20)</p>
-                    </span>
-                    <p className="es-p-margin">0.0 ES</p>
+                  <div className="col-md-4 text-center">
+                      <p className="main-er-txt">Eraswap <span className="sm-exch-txt2">(ERC20)</span></p>
+                       <p className="font-weight-bold">0.0 ES</p>
                   </div>
                 </div>
               </div>

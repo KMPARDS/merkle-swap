@@ -14,7 +14,7 @@ export class NavbarMain extends Component {
               <Nav className="mr-auto ml10">
                   {/* <Nav.Link href="#">About</Nav.Link>
                 <Nav.Link href="#">FAQ</Nav.Link> */}
-                <Nav.Link href="/transactions">Transactions </Nav.Link>
+                
                  {/* <NavDropdown title="Services" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Services</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Services action</NavDropdown.Item>
@@ -36,6 +36,7 @@ export class NavbarMain extends Component {
                 <img className="event-img" src="./images/stats.png" />
                 STATISTICS
               </Nav.Link> */}
+               <Nav.Link href="/transactions">Transactions </Nav.Link>
               <NavDropdown title="Token Exchange" id="collasible-nav-dropdown"> 
                   <NavDropdown.Item href="/transfer"><img className="wallet-img" src="./images/tap.png" />  ES (Native) to ES (ERC20)</NavDropdown.Item>
                   <NavDropdown.Item href="/token-exchange"><img className="wallet-img" src="./images/tap.png" />   ES (ERC20) to ES (Native) </NavDropdown.Item>
@@ -51,7 +52,7 @@ export class NavbarMain extends Component {
                 <img className="wallet-img" src="./images/tap.png" />  ESB to ES Na
                 </Nav.Link>
             */}
-               <Nav.Link className="btn btn-primary btn-color text-white" href="">
+               <Nav.Link className="btn btn-primary btn-color text-white login-btn" href="">
                 <img className="wallet-img" src="./images/wallet-white.png" />
                 Login with wallet
               </Nav.Link> 
