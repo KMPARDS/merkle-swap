@@ -1,13 +1,22 @@
 import { ethers } from 'ethers';
 import { CustomProvider } from './custom-provider';
 
-import { NrtManagerFactory } from './typechain/NrtManagerFactory';
-import { TimeAllyManagerFactory } from './typechain/TimeAllyManagerFactory';
-import { ValidatorManagerFactory } from './typechain/ValidatorManagerFactory';
-import { PrepaidEsFactory } from './typechain/PrepaidEsFactory';
+import { Erc20Factory } from './typechain/ETH/Erc20Factory';
+import { PlasmaManagerFactory } from './typechain/ETH/PlasmaManagerFactory';
+import { FundsManagerFactory as FundsManagerETHFactory } from './typechain/ETH/FundsManagerFactory';
+import { ReversePlasmaFactory } from './typechain/ESN/ReversePlasmaFactory';
+import { FundsManagerFactory as FundsManagerESNFactory } from './typechain/ESN/FundsManagerFactory';
 
 const config = {
+  ETH: {
+    network: 'rinkeby',
+    esContract: '0x206949aD387Ce7F35B71e9db3cB576D103123D27',
+    plasmaManager: '0x1c5b6e1ff599D1aCEd9cfCE73efab34f0688977e',
+    fundsManager: '0xBf2B93384948f57f6927C72baDEA5e0dd0182Aa5',
+  },
   ESN: {
+    reversePlasma: '0x3bEb087e33eC0B830325991A32E3F8bb16A51317',
+    fundsManager: '0xc4cfb05119Ea1F59fb5a8F949288801491D00110',
     nrtManager: 'NRT_MANAGER',
     timeallyManager: 'TIMEALLY_MANAGER',
     timeallyStakingTarget: 'TIMEALLY_STAKING_TARGET',
@@ -23,55 +32,37 @@ const config = {
   },
 };
 
-window.provider = new CustomProvider('https://node0.testnet.eraswap.network', {
+window.providerETH = ethers.getDefaultProvider(config.ETH.network);
+
+window.providerESN = new CustomProvider('https://testnet.eraswap.network', {
   name: 'EraSwapNetwork',
   chainId: 5196,
   ensAddress: config.ESN.kycdapp,
 });
 
-if (process.env.REACT_APP_LOCAL_BLOCKCHAIN === 'true') {
-  config.ESN = {
-    nrtManager: '0xAE519FC2Ba8e6fFE6473195c092bF1BAe986ff90',
-    timeallyManager: '0x73b647cbA2FE75Ba05B8e12ef8F8D6327D6367bF',
-    timeallyStakingTarget: '0x7d73424a8256C0b2BA245e5d5a3De8820E45F390',
-    validatorSet: '0x08425D9Df219f93d5763c3e85204cb5B4cE33aAa',
-    validatorManager: '0xA10A3B175F0f2641Cf41912b887F77D8ef34FAe8',
-    randomnessManager: '0x6E05f58eEddA592f34DD9105b1827f252c509De0',
-    blockRewardManager: '0x79EaFd0B5eC8D3f945E6BB2817ed90b046c0d0Af',
-    prepaidEs: '0x2Ce636d6240f8955d085a896e12429f8B3c7db26',
-    dayswappers: '',
-    kycdapp: '',
-    timeallyclub: '',
-    timeAllyPromotionalBucket: '',
-  };
-
-  window.provider = new CustomProvider(
-    'http://localhost:8545',
-    config.ESN.kycdapp !== ''
-      ? {
-          name: 'Ganache',
-          chainId: 1337,
-          ensAddress: config.ESN.kycdapp,
-        }
-      : undefined
-  );
-}
-
 // Temporary wallet
 if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
-  window.wallet = new ethers.Wallet(process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY, window.provider);
+  window.wallet = new ethers.Wallet(process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY);
 }
 
-window.nrtManagerInstance = NrtManagerFactory.connect(config.ESN.nrtManager, window.provider);
+window.esInstanceETH = Erc20Factory.connect(config.ESN.nrtManager, window.providerETH);
 
-window.timeallyManagerInstance = TimeAllyManagerFactory.connect(
-  config.ESN.timeallyManager,
-  window.provider
+window.plasmaManagerInstanceETH = PlasmaManagerFactory.connect(
+  config.ETH.plasmaManager,
+  window.providerETH
 );
 
-window.validatorManagerInstance = ValidatorManagerFactory.connect(
-  config.ESN.validatorManager,
-  window.provider
+window.fundsManagerInstanceETH = FundsManagerETHFactory.connect(
+  config.ETH.fundsManager,
+  window.providerETH
 );
 
-window.prepaidEsInstance = PrepaidEsFactory.connect(config.ESN.prepaidEs, window.provider);
+window.reversePlasmaInstanceESN = ReversePlasmaFactory.connect(
+  config.ESN.reversePlasma,
+  window.providerESN
+);
+
+window.fundsManagerInstanceESN = FundsManagerESNFactory.connect(
+  config.ESN.fundsManager,
+  window.providerESN
+);
