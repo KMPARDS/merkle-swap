@@ -77,6 +77,10 @@ export function BunchSubmission() {
         className="date-modal-container"
         backdrop="static"
       >
+        <Modal.Header closeButton>
+          <Modal.Title>Era Swap Plasma Framework</Modal.Title>
+        </Modal.Header>
+
         <Modal.Body>
           {!!window.wallet ? (
             lastEsnBlockOnEth !== null && latestEsnBlock !== null ? (
