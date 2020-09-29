@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BigNumber, ethers } from 'ethers';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Alert } from 'react-bootstrap';
 import { ModalBody } from './ModalBody';
 // import { Link } from 'react-router-dom';
 
@@ -75,14 +75,23 @@ export function BunchSubmission() {
         show={showModal}
         onHide={setShowModal.bind(null, false)}
         className="date-modal-container"
+        backdrop="static"
       >
         <Modal.Body>
           {!!window.wallet ? (
-            <ModalBody setShowModal={setShowModal} />
+            lastEsnBlockOnEth !== null && latestEsnBlock !== null ? (
+              <ModalBody
+                setShowModal={setShowModal}
+                plasmaState={{ lastEsnBlockOnEth, latestEsnBlock }}
+              />
+            ) : (
+              <Alert variant="info">
+                Please wait for Plasma State to be loaded... It this message is there for more than
+                10 seconds, please refresh the page and load your wallet again.
+              </Alert>
+            )
           ) : (
-            <>
-              <p>Please load your wallet before continuing.</p>
-            </>
+            <Alert variant="danger">Please load your wallet before continuing.</Alert>
           )}
         </Modal.Body>
       </Modal>
