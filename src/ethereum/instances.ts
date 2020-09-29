@@ -20,7 +20,7 @@ if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
 }
 
 window.esInstanceETH = Erc20Factory.connect(
-  addresses[process.env.NODE_ENV].ESN.nrtManager,
+  addresses[process.env.NODE_ENV].ETH.esContract,
   window.providerETH
 );
 
