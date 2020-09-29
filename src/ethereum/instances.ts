@@ -8,7 +8,7 @@ import {
 } from 'eraswap-sdk/dist/typechain/ETH';
 import { ReversePlasmaFactory, FundsManagerESNFactory } from 'eraswap-sdk/dist/typechain/ESN';
 
-window.providerETH = ethers.getDefaultProvider(
+window.providerETH = new ethers.providers.InfuraProvider(
   process.env.NODE_ENV === 'production' ? 'homestead' : 'rinkeby'
 );
 

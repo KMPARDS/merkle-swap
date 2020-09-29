@@ -40,15 +40,17 @@ export class Home extends Component<State> {
                     to="/token-exchange"
                     className="btn btn-primary btn-xl js-scroll-trigger prcd-btn"
                   >
-                    Token exchange
+                    ETH to ESN
                   </Link>
-
+                  <Link
+                    to="/token-exchange"
+                    className="btn btn-primary btn-xl js-scroll-trigger prcd-btn"
+                  >
+                    ESN to ETH
+                  </Link>
+                  <br />
                   <button className="btn btn-primary btn-xl js-scroll-trigger prcd-btn">
-                     Bunch Submission 
-                  </button>
-                  
-                  <button className="btn btn-primary btn-xl js-scroll-trigger prcd-btn">
-                      Get Era Swap Native Token
+                    Bunch Submission
                   </button>
                 </div>
 
