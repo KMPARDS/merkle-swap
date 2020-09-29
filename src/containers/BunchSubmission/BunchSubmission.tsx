@@ -16,8 +16,31 @@ export function BunchSubmission() {
         .add(BigNumber.from(2).pow(lastBunchHeader.bunchDepth))
         .sub(1);
       setLastEsnBlockOnEth(lastBlock.toNumber());
-    })();
+    })().catch(console.error);
   }, []);
+
+  const [latestEsnBlock, setLatestEsnBlock] = useState<number | null>(null);
+  useEffect(() => {
+    const fetchAndSetBlockNumber = async () => {
+      try {
+        const blockNumber = await window.providerESN.getBlockNumber();
+        setLatestEsnBlock(blockNumber);
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchAndSetBlockNumber();
+    const intervalId = setInterval(fetchAndSetBlockNumber, 5000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+  const blocksPending: number | null =
+    lastEsnBlockOnEth !== null && latestEsnBlock !== null
+      ? latestEsnBlock - lastEsnBlockOnEth
+      : null;
+
   return (
     <>
       <div className="bridge-bgd">
@@ -31,6 +54,10 @@ export function BunchSubmission() {
           <div className="exchange-box-wht mt40">
             <div className="exchange-container p-4">
               <p>Last ESN block on Ethereum: {lastEsnBlockOnEth ?? 'Loading...'}</p>
+              <p>
+                Latest Block on ESN: {latestEsnBlock ?? 'Loading...'}{' '}
+                {<>({blocksPending} pending)</>}
+              </p>
             </div>
           </div>
         </div>
