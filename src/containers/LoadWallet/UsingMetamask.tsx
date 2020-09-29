@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Button, Container } from 'react-bootstrap';
 import { ethers } from 'ethers';
-import { routine } from '../../utils';
+import { routine } from 'eraswap-sdk/dist/utils';
 
 type State = {
   displayScreen: number;
