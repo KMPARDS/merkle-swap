@@ -49,9 +49,12 @@ export class Home extends Component<State> {
                     ESN to ETH
                   </Link>
                   <br />
-                  <button className="btn btn-primary btn-xl js-scroll-trigger prcd-btn">
+                  <Link
+                    to="/bunch-submission"
+                    className="btn btn-primary btn-xl js-scroll-trigger prcd-btn"
+                  >
                     Bunch Submission
-                  </button>
+                  </Link>
                 </div>
 
                 {/* <div className="proceed-box-flex">

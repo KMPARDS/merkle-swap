@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Home } from './containers/Home/Home';
-import { NavbarMain } from './containers/Navbar/Navbar';
-import { TokenExchange } from './containers/TokenExchange/TokenExchange';
-import { Transfer } from './containers/Transfer/Transfer';
-import { EsbtoEs } from './containers/EsbtoEs/EsbtoEs';
-import { Transactions } from './containers/Transactions/Transactions';
+import { Home } from './containers/Home';
+import { NavbarMain } from './components/Navbar';
+import { TokenExchange } from './components/TokenExchange';
+import { Transfer } from './components/Transfer';
+import { EsbtoEs } from './components/EsbtoEs';
+import { Transactions } from './components/Transactions';
 import { BunchSubmission } from './containers/BunchSubmission';
 import './App.css';
 function App() {
