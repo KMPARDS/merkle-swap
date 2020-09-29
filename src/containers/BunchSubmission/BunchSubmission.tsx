@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BigNumber, ethers } from 'ethers';
+import { Button, Modal } from 'react-bootstrap';
+import { ModalBody } from './ModalBody';
 // import { Link } from 'react-router-dom';
 
 export function BunchSubmission() {
@@ -41,6 +43,8 @@ export function BunchSubmission() {
       ? latestEsnBlock - lastEsnBlockOnEth
       : null;
 
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   return (
     <>
       <div className="bridge-bgd">
@@ -58,10 +62,30 @@ export function BunchSubmission() {
                 Latest Block on ESN: {latestEsnBlock ?? 'Loading...'}{' '}
                 {<>({blocksPending} pending)</>}
               </p>
+              <div className="exc-btn-box">
+                <button className="tr-pn-btn p-1 px-4" onClick={setShowModal.bind(null, true)}>
+                  Start bunch submission process
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <Modal
+        show={showModal}
+        onHide={setShowModal.bind(null, false)}
+        className="date-modal-container"
+      >
+        <Modal.Body>
+          {!!window.wallet ? (
+            <ModalBody setShowModal={setShowModal} />
+          ) : (
+            <>
+              <p>Please load your wallet before continuing.</p>
+            </>
+          )}
+        </Modal.Body>
+      </Modal>
     </>
   );
 }
