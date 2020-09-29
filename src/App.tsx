@@ -6,6 +6,7 @@ import { TokenExchange } from './containers/TokenExchange/TokenExchange';
 import { Transfer } from './containers/Transfer/Transfer';
 import { EsbtoEs } from './containers/EsbtoEs/EsbtoEs';
 import { Transactions } from './containers/Transactions/Transactions';
+import { BunchSubmission } from './containers/BunchSubmission';
 import './App.css';
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/bunch-submission" exact component={BunchSubmission} />
           <Route path="/token-exchange" exact component={TokenExchange} />
           <Route path="/transfer" exact component={Transfer} />
           <Route path="/esb-to-es" exact component={EsbtoEs} />
