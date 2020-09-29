@@ -15,4 +15,10 @@ declare global {
     fundsManagerInstanceESN: FundsManagerESN;
     ethereum: ethers.providers.ExternalProvider;
   }
+
+  namespace NodeJS {
+    interface ProcessEnv {
+      KAMI_URL?: string;
+    }
+  }
 }
