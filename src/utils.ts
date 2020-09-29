@@ -2,7 +2,8 @@ import { BigNumber } from 'ethers';
 import { formatEther } from 'ethers/lib/utils';
 
 export function lessDecimals(input: string | BigNumber, decimals: number = 2) {
-  if (input instanceof BigNumber) {
+  // @ts-ignore
+  if (input._isBigNumber || input instanceof BigNumber) {
     input = formatEther(input);
   }
 
