@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Step0, Step1 } from './Steps';
+import { Step0, Step1, Step2 } from './Steps';
 
 export function ModalBody(props: {
   setShowModal: (newState: boolean) => any;
@@ -21,7 +21,16 @@ export function ModalBody(props: {
         />
       );
     case 2:
-    // <Step2 />;
+      return bunchDepth !== null ? (
+        <Step2
+          setCurrentStep={setCurrentStep}
+          selectedBunchDepth={bunchDepth}
+          plasmaState={props.plasmaState}
+        />
+      ) : (
+        <>Bunch depth is not selected</>
+      );
+
     default:
       return (
         <Alert variant="warning">

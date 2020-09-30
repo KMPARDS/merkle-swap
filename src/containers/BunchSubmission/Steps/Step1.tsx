@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getProposalFromKami } from '../../../plasma-utils/proposal';
 import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 
 export function Step1(props: {
@@ -7,12 +6,6 @@ export function Step1(props: {
   setBunchDepth: (bunchDepth: number) => any;
   plasmaState: { lastEsnBlockOnEth: number; latestEsnBlock: number };
 }) {
-  const [bunchProposal, setBunchProposal] = useState<any>(null);
-
-  useEffect(() => {
-    // getProposalFromKami();
-  }, []);
-
   const maxBunchDepth = Math.floor(
     Math.log2(props.plasmaState.latestEsnBlock - props.plasmaState.lastEsnBlockOnEth)
   );
