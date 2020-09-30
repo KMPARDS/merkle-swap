@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Step0, Step1, Step2, SignedBunchProposal } from './Steps';
 
-export function ModalBody(props: {
+export function StepsModal(props: {
   setShowModal: (newState: boolean) => any;
   plasmaState: { lastEsnBlockOnEth: number; latestEsnBlock: number };
 }) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BigNumber, ethers } from 'ethers';
 import { Button, Modal, Alert } from 'react-bootstrap';
-import { ModalBody } from './ModalBody';
+import { StepsModal } from './StepsModal';
 // import { Link } from 'react-router-dom';
 
 export function BunchSubmission() {
@@ -84,7 +84,7 @@ export function BunchSubmission() {
         <Modal.Body>
           {!!window.wallet ? (
             lastEsnBlockOnEth !== null && latestEsnBlock !== null ? (
-              <ModalBody
+              <StepsModal
                 setShowModal={setShowModal}
                 plasmaState={{ lastEsnBlockOnEth, latestEsnBlock }}
               />
