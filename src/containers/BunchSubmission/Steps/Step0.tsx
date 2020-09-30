@@ -6,7 +6,7 @@ import { Alert } from 'react-bootstrap';
 
 const requiredBalance = parseEther('0.05');
 
-export function Step0(props: { setCurrentStep: Function }) {
+export function Step0(props: { setCurrentStep: (currentStep: number) => any }) {
   const [ethBalance, setEthBalance] = useState<BigNumber | null>(null);
   useEffect(() => {
     (async () => {
