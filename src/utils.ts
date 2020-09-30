@@ -14,3 +14,7 @@ export function lessDecimals(input: string | BigNumber, decimals: number = 2) {
 
   return seperated.join('.');
 }
+
+export async function wait(msec: number) {
+  return await new Promise((res) => setTimeout(res, msec));
+}
