@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Step0, Step1, Step2, SignedBunchProposal } from './Steps';
+import { Step3 } from './Steps/Step3';
 
 export function StepsModal(props: {
   setShowModal: (newState: boolean) => any;
@@ -32,7 +33,12 @@ export function StepsModal(props: {
       ) : (
         <>Bunch depth is not selected</>
       );
-
+    case 3:
+      return signedBunch !== null ? (
+        <Step3 setCurrentStep={setCurrentStep} signedBunch={signedBunch} />
+      ) : (
+        <>Signed Bunch is not yet prepared</>
+      );
     default:
       return (
         <Alert variant="warning">
