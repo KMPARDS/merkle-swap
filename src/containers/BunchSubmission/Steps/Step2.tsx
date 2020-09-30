@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, Container, Row, Col, Button, Alert } from 'react-bootstrap';
 import { getProposalFromKami, kamiRpc } from '../../../plasma-utils/kami-rpc';
 import { wait } from '../../../utils';
+import { concat, hexZeroPad, keccak256, recoverAddress } from 'ethers/lib/utils';
+import { ethers, BigNumber } from 'ethers';
 
 interface BunchProposal {
   startBlockNumber: number;
@@ -11,7 +13,7 @@ interface BunchProposal {
   lastBlockHash: string;
 }
 
-interface SignedBunchProposal {
+export interface SignedBunchProposal {
   startBlockNumber: number;
   bunchDepth: number;
   transactionsMegaRoot: string;
@@ -22,58 +24,51 @@ interface SignedBunchProposal {
 
 export function Step2(props: {
   setCurrentStep: (currentStep: number) => any;
+  setSignedBunch: (signedBunch: SignedBunchProposal) => any;
   plasmaState: { lastEsnBlockOnEth: number; latestEsnBlock: number };
   selectedBunchDepth: number;
 }) {
-  // const [displayElement, setDisplayElement] = useState<JSX.Element>(<></>);
   const [lines, setLines] = useState<{ text: string; color: string }[]>([]);
-  // const [displayMessage, setDisplayMessage] = useState<{
-  //   message: string;
-  //   variant: 'danger' | 'success' | 'warning' | 'info';
-  // }>({ message: '', variant: 'info' });
   function pushLine(line: { text: string; color: string }) {
     setLines((l) => [...l, line]);
   }
 
+  const [ready, setReady] = useState<boolean>(false);
   useEffect(() => {
     (async () => {
       if (!process.env.REACT_APP_KAMI_URLS) {
-        // setDisplayElement(
-        //   <Alert variant="danger">
-        //     REACT_APP_KAMI_URLS env is not set. Please set it in the env file
-        //   </Alert>
-        // );
         pushLine({
           text: 'REACT_APP_KAMI_URLS env is not set. Please set it in the env file',
-          color: 'red',
+          color: 'orangered',
         });
         return;
       }
       const kamiUrls = process.env.REACT_APP_KAMI_URLS?.split(',');
 
       if (kamiUrls.length < 3) {
-        // setDisplayElement(
-        //   <Alert variant="danger">REACT_APP_KAMI_URLS env should contain atleast 3 Kami URLs</Alert>
-        // );
         pushLine({
           text: 'REACT_APP_KAMI_URLS env should contain atleast 3 Kami URLs',
-          color: 'red',
+          color: 'orangered',
         });
       }
 
-      // setDisplayElement(<Alert variant="danger">Please checking if Kamis are active...</Alert>);
       pushLine({
-        text: 'Please checking if Kamis are active...',
+        text: 'Please wait, checking if Kamis are active...',
         color: 'white',
       });
+
       const blockNumberResponses: (number | null)[] = [];
+      const addressResponses: (string | null)[] = [];
       for (const url of kamiUrls) {
         try {
           const resp = await kamiRpc(url, 'blockc_getBlockNumber', []);
-          // console.log('resp', url, resp);
           blockNumberResponses.push(resp);
+
+          const address = await kamiRpc(url, 'kami_getAddress', []);
+          addressResponses.push(address);
         } catch {
           blockNumberResponses.push(null);
+          addressResponses.push(null);
         }
       }
 
@@ -82,12 +77,7 @@ export function Step2(props: {
         blockNumberResponses.forEach((resp, index) => {
           if (resp === null) nullResponseIndexes.push(index);
         });
-        // setDisplayElement(
-        //   <Alert variant="danger">
-        //     The kamis: {nullResponseIndexes.map((index) => kamiUrls[index]).join(', ')} are
-        //     malfunctioning.
-        //   </Alert>
-        // );
+
         pushLine({
           text: `The kamis: ${nullResponseIndexes
             .map((index) => kamiUrls[index])
@@ -96,9 +86,6 @@ export function Step2(props: {
         });
         return;
       } else {
-        // setDisplayElement(
-        //   <Alert variant="info">All Kami's are active. Requesting for Bunch Proposal.</Alert>
-        // );
         pushLine({
           text: `All Kami's are active. Requesting for Bunch Proposal.`,
           color: 'white',
@@ -115,12 +102,6 @@ export function Step2(props: {
       } catch {}
 
       if (bunchProposal === null) {
-        // setDisplayElement(
-        //   <Alert variant="danger">
-        //     There was an error generating the Bunch Proposal, this can happen for higher bunch
-        //     depths, you try with a lower bunch depth.
-        //   </Alert>
-        // );
         pushLine({
           text:
             'There was an error generating the Bunch Proposal, this can happen for higher bunch depths, you try with a lower bunch depth.',
@@ -128,9 +109,6 @@ export function Step2(props: {
         });
         return;
       } else {
-        // setDisplayElement(
-        //   <Alert variant="info">Bunch Proposal prepared! Starting to collect signatures.</Alert>
-        // );
         pushLine({
           text: 'Bunch Proposal prepared! Starting to collect signatures.',
           color: 'white',
@@ -147,9 +125,6 @@ export function Step2(props: {
         } catch {}
 
         signBunchResponses.push(signedBunchProposal);
-        // setDisplayElement(
-        //   <Alert variant="info">Requesting Kami#{index + 1} for signature on this bunch...</Alert>
-        // );
         pushLine({
           text: `Requesting Kami#${index + 1} for signature on this bunch...`,
           color: 'white',
@@ -162,13 +137,6 @@ export function Step2(props: {
         signBunchResponses.forEach((resp, index) => {
           if (resp === null) nullResponseIndexes.push(index);
         });
-        // setDisplayElement(
-        //   <Alert variant="danger">
-        //     There was error getting signatures from these Kamis:{' '}
-        //     {nullResponseIndexes.map((index) => kamiUrls[index]).join(', ')}. You can try using a
-        //     lower bunch depth.
-        //   </Alert>
-        // );
         pushLine({
           text: `There was error getting signatures from these Kamis: ${nullResponseIndexes
             .map((index) => kamiUrls[index])
@@ -177,11 +145,94 @@ export function Step2(props: {
         });
       }
 
-      // setDisplayElement(<Alert variant="info">Signatures are received!</Alert>);
       pushLine({
         text: 'Signatures are received!',
         color: 'lightgreen',
       });
+
+      await wait(2000);
+
+      pushLine({
+        text: 'Verifying the signatures...',
+        color: 'white',
+      });
+
+      const bunchDigest = keccak256(
+        concat([
+          '0x1900',
+          window.plasmaManagerInstanceETH.address,
+          hexZeroPad('0x' + bunchProposal.startBlockNumber.toString(16), 32),
+          hexZeroPad('0x' + bunchProposal.bunchDepth.toString(16), 32),
+          bunchProposal.transactionsMegaRoot,
+          bunchProposal.receiptsMegaRoot,
+          bunchProposal.lastBlockHash,
+        ])
+      );
+
+      const addrSigs: { address: string; signature: string }[] = [];
+      for (const [index, signedBunch] of signBunchResponses.entries()) {
+        await wait(800);
+        if (!signedBunch) {
+          pushLine({
+            text: `Bunch from Kami#${index} is not available`,
+            color: 'orangered',
+          });
+          return;
+        }
+
+        const kamiAddress = addressResponses[index];
+        if (!kamiAddress) {
+          pushLine({
+            text: `Address of Kami#${index} is not available`,
+            color: 'orangered',
+          });
+          return;
+        }
+
+        const signature = signedBunch.signatures[0];
+        const address = recoverAddress(bunchDigest, signature);
+
+        if (kamiAddress.toLowerCase() === address.toLowerCase()) {
+          pushLine({
+            text: `Signature of Kami#${index + 1} is correct!`,
+            color: 'lightgreen',
+          });
+        } else {
+          pushLine({
+            text: `Signature of Kami#${index + 1} is incorrect :(`,
+            color: 'orangered',
+          });
+        }
+
+        addrSigs.push({
+          address: kamiAddress,
+          signature,
+        });
+      }
+
+      await wait(2000);
+
+      pushLine({
+        text: 'Arranging the signatures in ascending order...',
+        color: 'white',
+      });
+
+      const sortedSignatures = addrSigs
+        .sort((a, b) => (BigNumber.from(a.address).gt(b.address) ? 1 : -1))
+        .map((addrSig) => addrSig.signature);
+
+      await wait(1000);
+
+      props.setSignedBunch({
+        ...bunchProposal,
+        signatures: sortedSignatures,
+      });
+
+      pushLine({
+        text: 'Bunch Proposal is prepared for submiting!',
+        color: 'lightgreen',
+      });
+      setReady(true);
     })().catch(console.error);
   }, []);
 
@@ -197,6 +248,11 @@ export function Step2(props: {
             <p style={{ color: line.color }}>{line.text}</p>
           ))}
         </div>
+        {ready ? (
+          <button onClick={props.setCurrentStep.bind(null, 3)} className="tr-pn-btn p-1 px-4">
+            Select
+          </button>
+        ) : null}
       </div>
     </div>
   );
