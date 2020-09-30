@@ -11,9 +11,9 @@ interface JsonResponse {
   id: string | null;
 }
 
-export async function kamiRpc(url: URL, methodName: string, params: any[] = []): Promise<any> {
+export async function kamiRpc(url: string, methodName: string, params: any[] = []): Promise<any> {
   const response: JsonResponse = await ethers.utils.fetchJson(
-    url.toString(),
+    url,
     JSON.stringify({
       jsonrpc: '2.0',
       method: methodName,
@@ -32,4 +32,16 @@ export async function kamiRpc(url: URL, methodName: string, params: any[] = []):
   }
 
   return response.result;
+}
+
+export async function getProposalFromKami(
+  url: string,
+  startBlockNumber: number,
+  bunchDepth: number
+) {
+  const result = await kamiRpc(url, 'informer_computeBunchProposal', [
+    startBlockNumber,
+    bunchDepth,
+  ]);
+  return result;
 }
