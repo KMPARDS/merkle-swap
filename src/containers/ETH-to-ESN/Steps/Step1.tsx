@@ -19,35 +19,37 @@ export function Step1(props: {
       <div className="exchange-container mt20 mb20">
         <h3 className="main-prf">Step 1: Transfer ES to Funds Manager Smart Contract</h3>
         {display ? <Alert variant={display.variant}>{display.message}</Alert> : null}
-        <button
-          className="tr-pn-btn p-1 px-4"
-          onClick={async () => {
-            setBusy(true);
-            try {
-              if (!window.wallet) {
-                throw new Error('Wallet is not there');
-              }
-              const tx = await window.esInstanceETH
-                .connect(window.wallet.connect(window.providerETH))
-                .transfer(window.fundsManagerInstanceESN.address, props.amountToESN);
+        {!props.amountToESN.eq(0) ? (
+          <button
+            className="tr-pn-btn p-1 px-4"
+            onClick={async () => {
+              setBusy(true);
+              try {
+                if (!window.wallet) {
+                  throw new Error('Wallet is not there');
+                }
+                const tx = await window.esInstanceETH
+                  .connect(window.wallet.connect(window.providerETH))
+                  .transfer(window.fundsManagerInstanceESN.address, props.amountToESN);
 
-              setDisplay({
-                message: `Tx sent: ${tx.hash}`,
-                variant: 'success',
-              });
-              props.setTxHash(tx.hash);
-              props.setCurrentStep(2);
-            } catch (error) {
-              setDisplay({
-                message: parseEthersJsError(error),
-                variant: 'danger',
-              });
-            }
-            setBusy(false);
-          }}
-        >
-          {busy ? 'Sending tx..' : 'Transfer'}
-        </button>
+                setDisplay({
+                  message: `Tx sent: ${tx.hash}`,
+                  variant: 'success',
+                });
+                props.setTxHash(tx.hash);
+                props.setCurrentStep(2);
+              } catch (error) {
+                setDisplay({
+                  message: parseEthersJsError(error),
+                  variant: 'danger',
+                });
+              }
+              setBusy(false);
+            }}
+          >
+            {busy ? 'Sending tx..' : 'Transfer'}
+          </button>
+        ) : null}
         <br />
         OR resume with a transaction hash
         <FormControl

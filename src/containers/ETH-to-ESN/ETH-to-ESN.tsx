@@ -61,7 +61,9 @@ export class ETHtoESN extends Component<{}, State> {
                         ? lessDecimals(this.state.esErc20Balance)
                         : 'Loading...'}
                     </p>
-                    {this.state.esErc20Balance !== null && isAmountValid ? (
+                    {this.state.esErc20Balance !== null &&
+                    isAmountValid &&
+                    !!+this.state.amountInput ? (
                       <p className="font-weight-bold">
                         New Balance ={' '}
                         {lessDecimals(
@@ -76,6 +78,7 @@ export class ETHtoESN extends Component<{}, State> {
                       <FormControl
                         type="text"
                         className="form-control"
+                        value={this.state.amountInput}
                         onChange={(event) => this.setState({ amountInput: event.target.value })}
                         isInvalid={
                           isAmountValid &&
@@ -89,13 +92,19 @@ export class ETHtoESN extends Component<{}, State> {
                     </div>
                     <div className="exc-btn-box ">
                       <button
-                        className="tr-pn-btn"
+                        className="tr-pn-btn p-2"
                         onClick={() => this.setState({ showModal: true })}
                       >
-                        {' '}
                         TRANSFER ERC20
                       </button>
+                      <br />
                     </div>
+                    <button
+                      className="tr-pn-btn p-2"
+                      onClick={() => this.setState({ showModal: true, amountInput: '0' })}
+                    >
+                      Resume previous
+                    </button>
                   </div>
 
                   <div className="col-md-4 text-center">
@@ -108,7 +117,9 @@ export class ETHtoESN extends Component<{}, State> {
                         ? lessDecimals(this.state.esNativeBalance)
                         : 'Loading...'}
                     </p>
-                    {this.state.esNativeBalance !== null && isAmountValid ? (
+                    {this.state.esNativeBalance !== null &&
+                    isAmountValid &&
+                    !!+this.state.amountInput ? (
                       <p className="font-weight-bold">
                         New Balance ={' '}
                         {lessDecimals(
