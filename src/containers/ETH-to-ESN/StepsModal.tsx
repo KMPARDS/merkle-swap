@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Step1, Step2 } from './Steps';
+import { Step1, Step2, Step3 } from './Steps';
 import { BigNumber } from 'ethers';
 
 export function StepsModal(props: {
@@ -25,6 +25,13 @@ export function StepsModal(props: {
       ) : (
         <>Tx hash is not set</>
       );
+    case 3:
+      return txHash !== null ? (
+        <Step3 setCurrentStep={setCurrentStep} txHash={txHash} />
+      ) : (
+        <>Tx hash is not set</>
+      );
+
     default:
       return (
         <Alert variant="warning">
