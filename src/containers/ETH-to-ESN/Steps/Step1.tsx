@@ -36,7 +36,7 @@ export function Step1(props: {
                 variant: 'success',
               });
               props.setTxHash(tx.hash);
-              props.setCurrentStep(1);
+              props.setCurrentStep(2);
             } catch (error) {
               setDisplay({
                 message: parseEthersJsError(error),
@@ -73,7 +73,7 @@ export function Step1(props: {
               txHashInput.length === 66
             ) {
               props.setTxHash(txHashInput);
-              props.setCurrentStep(1);
+              props.setCurrentStep(2);
             }
           }}
         >

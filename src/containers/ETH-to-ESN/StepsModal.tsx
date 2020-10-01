@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Step1 } from './Steps';
+import { Step1, Step2 } from './Steps';
 import { BigNumber } from 'ethers';
 
 export function StepsModal(props: {
@@ -9,15 +9,21 @@ export function StepsModal(props: {
   amountToESN: BigNumber;
 }) {
   const [txHash, setTxHash] = useState<string | null>(null);
-  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [currentStep, setCurrentStep] = useState<number>(1);
   switch (currentStep) {
-    case 0:
+    case 1:
       return (
         <Step1
           setCurrentStep={setCurrentStep}
           amountToESN={props.amountToESN}
           setTxHash={setTxHash}
         />
+      );
+    case 2:
+      return txHash !== null ? (
+        <Step2 setCurrentStep={setCurrentStep} txHash={txHash} />
+      ) : (
+        <>Tx hash is not set</>
       );
     default:
       return (
