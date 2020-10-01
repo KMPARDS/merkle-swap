@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Step0 } from './Steps';
+import { Step1 } from './Steps';
 import { BigNumber } from 'ethers';
 
 export function StepsModal(props: {
@@ -13,7 +13,7 @@ export function StepsModal(props: {
   switch (currentStep) {
     case 0:
       return (
-        <Step0
+        <Step1
           setCurrentStep={setCurrentStep}
           amountToESN={props.amountToESN}
           setTxHash={setTxHash}

@@ -3,7 +3,7 @@ import { BigNumber, ethers } from 'ethers';
 import { parseEthersJsError } from 'eraswap-sdk/dist/utils';
 import { Alert, FormControl } from 'react-bootstrap';
 
-export function Step0(props: {
+export function Step1(props: {
   setCurrentStep: (currentStep: number) => any;
   setTxHash: (txHash: string) => any;
   amountToESN: BigNumber;
