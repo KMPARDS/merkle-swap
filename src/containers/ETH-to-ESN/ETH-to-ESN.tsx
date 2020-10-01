@@ -47,7 +47,7 @@ export class ETHtoESN extends Component<{}, State> {
           <div className="wrapper-container mt80">
             <h1 className="text-uppercase text-white font-weight-bold">Eraswap Token Bridge</h1>
 
-            <h5>Transfer Tokens between Ethereum's Main network, and Eraswap network</h5>
+            <h5>Transfer Tokens from Ethereum's Main network to Era Swap Network</h5>
             <div className="exchange-box-wht mt40 arrow-bg-right ">
               <div className="exchange-container">
                 <div className="row pinside40">
