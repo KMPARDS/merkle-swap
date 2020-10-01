@@ -139,9 +139,10 @@ export class ETHtoESN extends Component<{}, State> {
           show={this.state.showModal}
           onHide={this.handleClose}
           className="date-modal-container"
+          backdrop="static"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Era Swap Plasma Framework</Modal.Title>
+            <Modal.Title>Convert ERC20 to Native</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
