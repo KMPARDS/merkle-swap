@@ -17,14 +17,15 @@ interface DepositProof {
 
 export async function generateDepositProof(
   txHash: string,
-  overides: DepositProof = {}
+  pushLine: (line: { text: string; color: string }) => any
 ): Promise<string> {
   const gp = new GetProof(window.providerETH.connection.url);
-  const txProof = await gp.transactionProof(txHash);
-  const rcProof = await gp.receiptProof(txHash);
 
+  pushLine({
+    text: 'Loading raw transaction from blockchain...',
+    color: 'white',
+  });
   const tx = await window.providerETH.getTransaction(txHash);
-
   const rawTransaction = ethers.utils.serializeTransaction(
     {
       to: tx.to,
@@ -42,20 +43,39 @@ export async function generateDepositProof(
     }
   );
 
+  pushLine({
+    text: 'Loading raw receipt from blockchain...',
+    color: 'white',
+  });
   const rawReceipt = await getRawReceipt(txHash, window.providerETH);
+
+  pushLine({
+    text: 'Generating Merkle Patricia Proof for Transaction...',
+    color: 'white',
+  });
+  const txProof = await gp.transactionProof(txHash);
+
+  pushLine({
+    text: 'Generating Merkle Patricia Proof for Receipt...',
+    color: 'white',
+  });
+  const rcProof = await gp.receiptProof(txHash);
 
   if (tx.blockNumber === undefined) {
     throw new Error('Transaction is not yet confirmed');
   }
 
+  pushLine({
+    text: 'Packing up the proofs for submitting to the smart contract...',
+    color: 'white',
+  });
   const preparingValues: DepositProof = {
-    blockNumber: overides.blockNumber || ethers.utils.hexlify(tx.blockNumber),
-    path: overides.path || getPathFromTransactionIndex(+txProof.txIndex),
-    rawTransaction: overides.rawTransaction || rawTransaction,
-    parentNodesTx: overides.parentNodesTx || ethers.utils.RLP.encode(txProof.txProof),
-    rawReceipt: overides.rawReceipt || rawReceipt,
-    parentNodesReceipt:
-      overides.parentNodesReceipt || ethers.utils.RLP.encode(rcProof.receiptProof),
+    blockNumber: ethers.utils.hexlify(tx.blockNumber),
+    path: getPathFromTransactionIndex(+txProof.txIndex),
+    rawTransaction,
+    parentNodesTx: ethers.utils.RLP.encode(txProof.txProof),
+    rawReceipt,
+    parentNodesReceipt: ethers.utils.RLP.encode(rcProof.receiptProof),
   };
 
   const proofArray = Object.values(preparingValues);

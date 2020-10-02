@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Step1, Step2, Step3 } from './Steps';
+import { Step1, Step2, Step3, Step4 } from './Steps';
 import { BigNumber } from 'ethers';
 
 export function StepsModal(props: {
@@ -10,6 +10,7 @@ export function StepsModal(props: {
 }) {
   const [txHash, setTxHash] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<number>(1);
+  const [depositProof, setDepositProof] = useState<string | null>(null);
   switch (currentStep) {
     case 1:
       return (
@@ -28,6 +29,17 @@ export function StepsModal(props: {
     case 3:
       return txHash !== null ? (
         <Step3 setCurrentStep={setCurrentStep} txHash={txHash} />
+      ) : (
+        <>Tx hash is not set</>
+      );
+    case 4:
+      return txHash !== null ? (
+        <Step4
+          setCurrentStep={setCurrentStep}
+          txHash={txHash}
+          depositProof={depositProof}
+          setDepositProof={setDepositProof}
+        />
       ) : (
         <>Tx hash is not set</>
       );
