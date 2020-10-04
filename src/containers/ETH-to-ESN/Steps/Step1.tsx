@@ -30,7 +30,7 @@ export function Step1(props: {
                 }
                 const tx = await window.esInstanceETH
                   .connect(window.wallet.connect(window.providerETH))
-                  .transfer(window.fundsManagerInstanceESN.address, props.amountToESN);
+                  .transfer(window.fundsManagerInstanceETH.address, props.amountToESN);
 
                 setDisplay({
                   message: `Tx sent: ${tx.hash}`,
