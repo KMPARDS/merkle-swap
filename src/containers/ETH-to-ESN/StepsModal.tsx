@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Step1, Step2, Step3, Step4 } from './Steps';
+import { Step1, Step2, Step3, Step4, Step5 } from './Steps';
 import { BigNumber } from 'ethers';
 
 export function StepsModal(props: {
@@ -42,6 +42,12 @@ export function StepsModal(props: {
         />
       ) : (
         <>Tx hash is not set</>
+      );
+    case 5:
+      return depositProof !== null ? (
+        <Step5 setCurrentStep={setCurrentStep} depositProof={depositProof} />
+      ) : (
+        <>depositProof is not set</>
       );
 
     default:
