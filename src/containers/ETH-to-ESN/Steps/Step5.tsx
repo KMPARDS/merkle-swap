@@ -33,7 +33,7 @@ export function Step5(props: {
 
         await tx.wait();
         pushLine({
-          text: `Tx confirmed! You should have received tokens from smart contract`,
+          text: `Tx confirmed! You should have received tokens from smart contract. You can close this popup.`,
           color: 'lightgreen',
         });
       } catch (error) {
