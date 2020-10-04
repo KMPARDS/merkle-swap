@@ -7,35 +7,39 @@ export class NavbarMain extends Component {
   render() {
     return (
       <div>
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top" >
-            <Navbar.Brand href="/"><img className="asset-logo" src="./images/eralogo.png" /></Navbar.Brand>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
-              <Nav className="mr-auto ml10">
-                {/* <Nav.Link href="#">About</Nav.Link>
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" fixed="top">
+          <Navbar.Brand>
+            <Link to="/">
+              <img className="asset-logo" src="./images/eralogo.png" />
+            </Link>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto ml10">
+              {/* <Nav.Link href="#">About</Nav.Link>
                 <Nav.Link href="#">FAQ</Nav.Link> */}
-                <Nav.Link href="/transactions">Transactions </Nav.Link>
-                {/* <NavDropdown title="Services" id="collasible-nav-dropdown">
+              <Link to="/transactions">Transactions </Link>
+              {/* <NavDropdown title="Services" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Services</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Services action</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.3">Services</NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action/3.4">Services</NavDropdown.Item>
                 </NavDropdown> */}
-              </Nav>
-             
-              <Nav>
-                <Nav.Link href="/esb-to-es" className=" pdr20 ">
-                <img className="wallet-img" src="./images/tap.png" />  ESB to ES Na
-                </Nav.Link>
-               
-               <Nav.Link className="btn btn-primary btn-color text-white" href="">
+            </Nav>
+
+            <Nav>
+              <Link to="/esb-to-es" className=" pdr20 ">
+                <img className="wallet-img" src="./images/tap.png" /> ESB to ES Na
+              </Link>
+
+              <Link to="/wallet" className="btn btn-primary btn-color text-white">
                 <img className="wallet-img" src="./images/wallet-white.png" />
-                  0xdb9e4bfe51b22lkjbn
-              </Nav.Link> 
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+                0xdb9e4bfe51b22lkjbn
+              </Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
         {/* <Navbar collapseOnSelect expand="lg" bg="white">
           <Navbar.Brand href="/">
             
