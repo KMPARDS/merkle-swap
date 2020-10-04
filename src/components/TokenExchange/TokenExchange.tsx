@@ -30,19 +30,17 @@ export class TokenExchange extends Component<State> {
       <div>
         <div className="bridge-bgd">
           <div className="wrapper-container mt80">
-          <h1 className="text-uppercase text-white font-weight-bold">
-          Eraswap Token Bridge
-                  </h1>
-            
+            <h1 className="text-uppercase text-white font-weight-bold">Eraswap Token Bridge</h1>
+
             <h5>Transfer Tokens between Ethereum's Main network, and Eraswap network</h5>
             <div className="exchange-box-wht mt40 arrow-bg-right ">
               <div className="exchange-container">
                 <div className="row pinside40">
                   <div className="col-md-4 text-center">
-                   
-                      <p className="main-er-txt">Eraswap  <span className="sm-exch-txt">(ERC20)</span></p>
-                     
-                  
+                    <p className="main-er-txt">
+                      Eraswap <span className="sm-exch-txt">(ERC20)</span>
+                    </p>
+
                     <p className="font-weight-bold">0.0 ES</p>
                   </div>
 

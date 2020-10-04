@@ -248,13 +248,13 @@ Padding space
   padding: 0;
   margin: 0;
 }
-.themecolor{
+.themecolor {
   background: #dd3c45;
 }
-.themetextcolor{
+.themetextcolor {
   color: #dd3c45;
 }
-.converticon{
+.converticon {
   background: #dd3c45;
   width: 45px;
   height: 45px;
@@ -266,74 +266,73 @@ Padding space
   color: #fff;
   padding-top: 10px;
 }
-.btn-color{
+.btn-color {
   background: #dd3c45;
-  border:none;
+  border: none;
   color: #fff !important;
   border-radius: 10rem;
 }
-.btn-color:hover{
+.btn-color:hover {
   color: #fff !important;
 }
 
 .maintab.nav-tabs {
-  border-bottom:none;
+  border-bottom: none;
 }
 .maintab.nav-tabs .nav-link {
   display: block;
   padding: 0.9rem 2rem !important;
 }
 .maintab.nav-tabs .nav-link {
-    border: 1px solid transparent;
-    border-top-left-radius: .25rem;
-    border-top-right-radius: .25rem;
-    background: #404040;
-    color: #fff;
-    border-radius: 10px 10px 0 0 !important;
-    font-weight: 600;
-    color: #fff !important;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  background: #404040;
+  color: #fff;
+  border-radius: 10px 10px 0 0 !important;
+  font-weight: 600;
+  color: #fff !important;
 }
 .maintab.nav-tabs .nav-link:hover {
-  border-color:none !important;
+  border-color: none !important;
   background-color: #dd3c45;
 }
-.maintab.nav-tabs  .nav-link.active {
+.maintab.nav-tabs .nav-link.active {
   color: #fff !important;
   background-color: #dd3c45 !important;
   border-color: none !important;
   font-weight: 600;
 }
-  .tab-content > .active {
-    background: #fff !important;
-    color: #000!important;
-    border-radius: 0px 0px 16px 16px!important;
-    text-align: left;
-    margin-top: 2px;
-  } 
-  .multiexchange-box .tabcontent-box {
-    min-height: auto !important;
-    margin-top: 2px;
-  }
-  .bridge-bgd {
-    background: linear-gradient(rgba(0, 0, 0, -0.4), rgba(0, 0, 0, 0.6)), url(/images/background.png);
-    background-repeat: no-repeat;
-    width: 100%;
-    height:auto !important;
-    background-size: cover;
-    min-height: 100vh;
-  }
-  .arrow-bg-right::before {
-    background-size: cover !important;
-    position: absolute;
-    width: 170px;
-    height: 200px;
-    content: "";
-    background: url(/images/twoarr.png) no-repeat;
-    background-size: auto;
-    background-size: auto;
-    left: 0;
-    right: 25px;
-    margin: 0 auto;
-    padding: 0;
-  }
-  
+.tab-content > .active {
+  background: #fff !important;
+  color: #000 !important;
+  border-radius: 0px 0px 16px 16px !important;
+  text-align: left;
+  margin-top: 2px;
+}
+.multiexchange-box .tabcontent-box {
+  min-height: auto !important;
+  margin-top: 2px;
+}
+.bridge-bgd {
+  background: linear-gradient(rgba(0, 0, 0, -0.4), rgba(0, 0, 0, 0.6)), url(/images/background.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  height: auto !important;
+  background-size: cover;
+  min-height: 100vh;
+}
+.arrow-bg-right::before {
+  background-size: cover !important;
+  position: absolute;
+  width: 170px;
+  height: 200px;
+  content: '';
+  background: url(/images/twoarr.png) no-repeat;
+  background-size: auto;
+  background-size: auto;
+  left: 0;
+  right: 25px;
+  margin: 0 auto;
+  padding: 0;
+}
