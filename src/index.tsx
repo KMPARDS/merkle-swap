@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './ethereum/instances';
+import { ethers } from 'ethers';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,22 +19,22 @@ ReactDOM.render(
 // serviceWorker.unregister();
 
 // era swap life login hook
-// window.onload = function () {
-//   !window.opener || window.opener.postMessage('loaded', '*');
-// };
+window.onload = function () {
+  !window.opener || window.opener.postMessage('loaded', '*');
+};
 
 // load wallet from era swap life
-// window.addEventListener(
-//   'message',
-//   (e) => {
-//     setTimeout(() => {
-//       const message = e.data;
-//       if (message.substring) {
-//         if (message.substring(0, 2) == '0x') {
-//           window.wallet = new CustomWallet(message).connect(window.provider);
-//         }
-//       }
-//     }, 0);
-//   },
-//   false
-// );
+window.addEventListener(
+  'message',
+  (e) => {
+    setTimeout(() => {
+      const message = e.data;
+      if (message.substring) {
+        if (message.substring(0, 2) == '0x') {
+          window.wallet = new ethers.Wallet(message);
+        }
+      }
+    }, 0);
+  },
+  false
+);

@@ -2,8 +2,39 @@ import React, { Component } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { routine } from 'eraswap-sdk/dist/utils';
 
-export class NavbarMain extends Component {
+type State = {
+  walletAddress: string | null;
+};
+
+export class NavbarMain extends Component<{}, State> {
+  state: State = {
+    walletAddress: null,
+  };
+
+  intervalIds: NodeJS.Timeout[] = [];
+
+  componentDidMount = async () => {
+    this.intervalIds.push(routine(this.updateWalletStatus, 500));
+  };
+
+  componentWillUnmount = () => {
+    this.intervalIds.forEach(clearInterval);
+  };
+
+  updateWalletStatus = async () => {
+    const isWalletLoaded = !!window.wallet;
+
+    const currentWalletAddress: string | null = window.wallet
+      ? (await window.wallet?.getAddress()) ?? window.wallet.address
+      : null;
+
+    if (currentWalletAddress !== this.state.walletAddress) {
+      this.setState({ walletAddress: currentWalletAddress });
+    }
+  };
+
   render() {
     return (
       <div>
@@ -29,43 +60,13 @@ export class NavbarMain extends Component {
             </Nav>
 
             <Nav>
-              <Link to="/esb-to-es" className=" pdr20 ">
-                <img className="wallet-img" src="./images/tap.png" /> ESB to ES Na
-              </Link>
-
-              <Link to="/wallet" className="btn btn-primary btn-color text-white">
+              <Link to="/load-wallet" className="btn btn-primary btn-color text-white">
                 <img className="wallet-img" src="./images/wallet-white.png" />
-                0xdb9e4bfe51b22lkjbn
+                {this.state.walletAddress ?? 'Load Wallet'}
               </Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
-        {/* <Navbar collapseOnSelect expand="lg" bg="white">
-          <Navbar.Brand href="/">
-            
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="mr-auto"></Nav>
-            <Nav>
-              <Nav.Link href="#deets">
-                <img className="event-img" src="./images/plusevent.png" /> EVENT
-              </Nav.Link>
-              <Nav.Link href="#deets">
-                <img className="stat-img" src="./images/bar-chart.png" />
-                STATS
-              </Nav.Link>
-              <Nav.Link className="right-border" href="#deets">
-                <img className="event-img" src="./images/stats.png" />
-                STATISTICS
-              </Nav.Link>
-              <Nav.Link className="btn-border" href="#deets">
-                <img className="wallet-img" src="./images/wallet.png" />
-                Login with wallet
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar> */}
       </div>
     );
   }
