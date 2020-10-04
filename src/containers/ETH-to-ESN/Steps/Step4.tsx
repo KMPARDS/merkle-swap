@@ -73,7 +73,7 @@ export function Step4(props: {
             ) : null}
             <button
               className="tr-pn-btn p-1 px-4 mt-2 mx-auto"
-              onClick={props.setCurrentStep.bind(null, 4)}
+              onClick={props.setCurrentStep.bind(null, 5)}
             >
               Submit the proof to ESN
             </button>
