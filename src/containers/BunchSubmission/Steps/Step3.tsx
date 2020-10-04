@@ -14,6 +14,8 @@ export function Step3(props: {
     null
   );
   const [busy, setBusy] = useState<boolean>(false);
+  const [txHash, setTxHash] = useState<string | null>(null);
+
   return (
     <div className="exchange-box-wht-modal">
       <div className="exchange-container mt20 mb20">
@@ -66,7 +68,8 @@ export function Step3(props: {
                   props.signedBunch.signatures
                 );
 
-              setDisplay({ message: `Transaction hash: ${tx.hash}`, variant: 'success' });
+              setDisplay({ message: `Tx sent to ethereum network!`, variant: 'success' });
+              setTxHash(tx.hash);
             } catch (error) {
               setDisplay({ message: parseEthersJsError(error), variant: 'danger' });
             }
@@ -76,6 +79,17 @@ export function Step3(props: {
         >
           {busy ? 'Submitting...' : 'Submit Transaction'}
         </button>
+
+        {txHash ? (
+          <a
+            target="_blank"
+            href={`https://${
+              process.env.NODE_ENV === 'production' ? '' : 'rinkeby.'
+            }etherscan.io/tx/${txHash}`}
+          >
+            View Tx on EtherScan
+          </a>
+        ) : null}
       </div>
     </div>
   );
