@@ -44,7 +44,7 @@ export class UsingMetamask extends Component<{}, State> {
         // console.log(network);
 
         const onCorrectNetwork =
-          network.chainId === (process.env.NODE_ENV === 'production' ? 5197 : 5196);
+          network.chainId === (process.env.REACT_APP_ENV === 'production' ? 5197 : 5196);
 
         if (!onCorrectNetwork) {
           this.setState({

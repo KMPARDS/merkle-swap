@@ -9,7 +9,7 @@ import {
 import { ReversePlasmaFactory, FundsManagerESNFactory } from 'eraswap-sdk/dist/typechain/ESN';
 
 window.providerETH = new ethers.providers.InfuraProvider(
-  process.env.NODE_ENV === 'production' ? 'homestead' : 'rinkeby'
+  process.env.REACT_APP_ENV === 'production' ? 'homestead' : 'rinkeby'
 );
 
 window.providerESN = new CustomProvider('testnet');
@@ -19,27 +19,26 @@ if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
   window.wallet = new ethers.Wallet(process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY);
 }
 
-window.esInstanceETH = Erc20Factory.connect(
-  addresses[process.env.NODE_ENV].ETH.esContract,
-  window.providerETH
-);
+const env = process.env.REACT_APP_ENV ?? 'development';
+
+window.esInstanceETH = Erc20Factory.connect(addresses[env].ETH.esContract, window.providerETH);
 
 window.plasmaManagerInstanceETH = PlasmaManagerFactory.connect(
-  addresses[process.env.NODE_ENV].ETH.plasmaManager,
+  addresses[env].ETH.plasmaManager,
   window.providerETH
 );
 
 window.fundsManagerInstanceETH = FundsManagerETHFactory.connect(
-  addresses[process.env.NODE_ENV].ETH.fundsManager,
+  addresses[env].ETH.fundsManager,
   window.providerETH
 );
 
 window.reversePlasmaInstanceESN = ReversePlasmaFactory.connect(
-  addresses[process.env.NODE_ENV].ESN.reversePlasma,
+  addresses[env].ESN.reversePlasma,
   window.providerESN
 );
 
 window.fundsManagerInstanceESN = FundsManagerESNFactory.connect(
-  addresses[process.env.NODE_ENV].ESN.fundsManager,
+  addresses[env].ESN.fundsManager,
   window.providerESN
 );

@@ -19,6 +19,7 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       REACT_APP_KAMI_URLS?: string;
+      REACT_APP_ENV?: 'development' | 'production';
     }
   }
 }

@@ -84,7 +84,7 @@ export function Step3(props: {
           <a
             target="_blank"
             href={`https://${
-              process.env.NODE_ENV === 'production' ? '' : 'rinkeby.'
+              process.env.REACT_APP_ENV === 'production' ? '' : 'rinkeby.'
             }etherscan.io/tx/${txHash}`}
           >
             View Tx on EtherScan
