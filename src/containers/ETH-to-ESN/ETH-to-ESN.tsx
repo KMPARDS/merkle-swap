@@ -95,7 +95,7 @@ export class ETHtoESN extends Component<{}, State> {
                         className="tr-pn-btn p-2"
                         onClick={() => this.setState({ showModal: true })}
                       >
-                        TRANSFER ERC20
+                        TRANSFER ERC20 to Smart Contract
                       </button>
                       <br />
                     </div>
