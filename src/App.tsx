@@ -8,6 +8,7 @@ import { EsbtoEs } from './components/EsbtoEs';
 import { Transactions } from './components/Transactions';
 import { BunchSubmission } from './containers/BunchSubmission';
 import { ETHtoESN } from './containers/ETH-to-ESN';
+import { ESNtoETH } from './containers/ESN-to-ETH';
 import { LoadWallet } from './containers/LoadWallet';
 import './App.css';
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/bunch-submission" exact component={BunchSubmission} />
           <Route path="/eth-to-esn" exact component={ETHtoESN} />
+          <Route path="/esn-to-eth" exact component={ESNtoETH} />
           <Route path="/load-wallet" exact component={LoadWallet} />
 
           <Route path="/token-exchange" exact component={TokenExchange} />

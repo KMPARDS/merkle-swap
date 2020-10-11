@@ -43,7 +43,7 @@ export class Home extends Component<State> {
                     ETH to ESN
                   </Link>
                   <Link
-                    to="/token-exchange"
+                    to="/esn-to-eth"
                     className="btn btn-primary btn-xl js-scroll-trigger prcd-btn"
                   >
                     ESN to ETH

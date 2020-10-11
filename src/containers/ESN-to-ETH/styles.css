@@ -1,0 +1,105 @@
+.exchange-box-wht {
+  background-color: #ffffff;
+  width: 45%;
+  margin: 0 auto;
+  padding: 0px;
+  border-radius: 10px;
+}
+
+.tr-pn-btn {
+  background-color: #dd3c45;
+  color: #ffffff;
+  text-align: center;
+  border-color: #a7a7a7;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  padding: 0 15px;
+  line-height: 25px;
+}
+
+.er-value {
+  display: flex;
+  margin-left: 29%;
+  margin-bottom: 0px;
+}
+
+.sm-exch-txt {
+  color: #535353;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+}
+
+.main-er-txt {
+  color: #000000;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+
+.exc-btn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.es-p-margin {
+  color: #000000;
+  margin-left: 29%;
+  font-weight: 500;
+}
+
+.es-p {
+  margin-left: 29%;
+  font-weight: 500;
+}
+
+.exchange-container {
+  margin-top: 30px;
+}
+
+.input-group-text.bgd-color {
+  background: #000000b5;
+  color: #fff;
+}
+
+.input-group-text.grey-color {
+  background-color: #a7a7a78c;
+  color: dimgray;
+}
+
+.exchange-box-wht-modal {
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.tr-pn-btn-modal {
+  background-color: #dd3c45;
+  color: #ffffff;
+  text-align: center;
+  border-color: #a7a7a7;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.prf-md-txt {
+  text-align: center;
+  font-weight: 500;
+}
+
+.main-prf {
+  font-weight: 500;
+  text-align: center;
+}
+
+.submit-modal {
+  background-color: #dd3c45;
+  color: #ffffff;
+  text-align: center;
+  border-color: #a7a7a7;
+}

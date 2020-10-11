@@ -7,7 +7,7 @@ import { StepsModal } from './StepsModal';
 export function BunchSubmission() {
   const [lastEsnBlockOnEth, setLastEsnBlockOnEth] = useState<number | null>(null);
   useEffect(() => {
-    (async () => {
+    const updateLastEsnBlock = async () => {
       const lastBunchIndex = await window.plasmaManagerInstanceETH.lastBunchIndex();
       if (lastBunchIndex.eq(ethers.constants.MaxUint256)) {
         setLastEsnBlockOnEth(-1);
@@ -18,7 +18,15 @@ export function BunchSubmission() {
         .add(BigNumber.from(2).pow(lastBunchHeader.bunchDepth))
         .sub(1);
       setLastEsnBlockOnEth(lastBlock.toNumber());
-    })().catch(console.error);
+    };
+
+    const intervalId = setInterval(() => {
+      updateLastEsnBlock().catch(console.error);
+    }, 15000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
   }, []);
 
   const [latestEsnBlock, setLatestEsnBlock] = useState<number | null>(null);

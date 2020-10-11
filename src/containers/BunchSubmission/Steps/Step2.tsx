@@ -120,15 +120,18 @@ export function Step2(props: {
       const signBunchResponses: (SignedBunchProposal | null)[] = [];
       for (const [index, url] of kamiUrls.entries()) {
         let signedBunchProposal: SignedBunchProposal | null = null;
+
+        pushLine({
+          text: `Requesting Kami#${index + 1} for signature on this bunch...`,
+          color: 'white',
+        });
+
         try {
           signedBunchProposal = await kamiRpc(url, 'informer_signBunch', [bunchProposal]);
         } catch {}
 
         signBunchResponses.push(signedBunchProposal);
-        pushLine({
-          text: `Requesting Kami#${index + 1} for signature on this bunch...`,
-          color: 'white',
-        });
+
         await wait(1000);
       }
 

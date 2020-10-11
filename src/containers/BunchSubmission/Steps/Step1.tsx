@@ -10,6 +10,13 @@ export function Step1(props: {
     Math.log2(props.plasmaState.latestEsnBlock - props.plasmaState.lastEsnBlockOnEth)
   );
 
+  // bunch generation time taken:
+  // 11 bunch depth: 17 secs
+  // 12 bunch depth: 24 secs
+  // 13 bunch depth: 37 secs
+  // 14 bunch depth: 1 min 32 secs
+  // 15 bunch depth:
+
   return (
     <div className="exchange-box-wht-modal">
       <div className="exchange-container mt20 mb20">
