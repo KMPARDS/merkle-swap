@@ -77,54 +77,74 @@ export function Step3(props: { setCurrentStep: (currentStep: number) => any; txH
             Your transaction is included in block {txBlockNumber} on ESN. The latest bunch on Plasma
             Smart Contract on Ethereum has last block number {lastEsnBlockOnEth}.{' '}
             {lastEsnBlockOnEth > txBlockNumber
-              ? 'Your tx is already included!'
+              ? 'Your tx is already included! And you can proceed to submit proof!'
               : 'Your tx needs to be posted through a bunch proposal.'}
           </Alert>
         ) : (
           'Please wait...'
         )}
 
-        {txBlockNumber !== null &&
+        {esnLatestBlock !== null &&
         lastEsnBlockOnEth !== null &&
+        txBlockNumber !== null &&
+        immediateBunchLastBlock !== null &&
         lastEsnBlockOnEth < txBlockNumber ? (
           <Alert variant="info">
-            Immediate bunch with higest bunch depth is {immediateBunchDepth}. This bunch doesn't
-            includes your tx, since it includes blocks only upto {immediateBunchLastBlock}. Bunch
-            with depth {immediateBunchDepth + 1} would include your tx, but for that you need to
-            wait for{' '}
-            {lastEsnBlockOnEth !== null && esnLatestBlock !== null
-              ? (() => {
-                  const blocks =
-                    lastEsnBlockOnEth + 2 ** (immediateBunchDepth + 1) - esnLatestBlock;
+            Immediate bunch with higest bunch depth is {immediateBunchDepth}.{' '}
+            {immediateBunchLastBlock >= txBlockNumber ? (
+              <>This bunch would include your tx!</>
+            ) : (
+              <>
+                This bunch doesn't includes your tx, since it includes blocks only upto{' '}
+                {immediateBunchLastBlock}. Bunch with depth {immediateBunchDepth + 1} would include
+                your tx, but for that you need to wait for{' '}
+                {lastEsnBlockOnEth !== null && esnLatestBlock !== null
+                  ? (() => {
+                      const blocks =
+                        lastEsnBlockOnEth + 2 ** (immediateBunchDepth + 1) - esnLatestBlock;
 
-                  const seconds = blocks * 5;
+                      const seconds = blocks * 5;
 
-                  return (
-                    <>
-                      {blocks} blocks ({parseSecondsRemaining(seconds)})
-                    </>
-                  );
-                })()
-              : '[Loading]'}{' '}
-            to be sealed on ESN. If you need withdrawal on Ethereum urgently, then you can submit
-            the multiple bunches with depths:{' '}
-            {(() => {
-              const depths = [];
-              let depth = immediateBunchDepth;
-              let latestBlock = lastEsnBlockOnEth ?? 0;
-              while (depth >= 0) {
-                depths.push(depth);
-                latestBlock += 2 ** depth;
-                depth--;
-                if (latestBlock >= (txBlockNumber ?? 0)) {
-                  break;
-                }
-              }
+                      return (
+                        <>
+                          {blocks} blocks ({parseSecondsRemaining(seconds)})
+                        </>
+                      );
+                    })()
+                  : '[Loading]'}{' '}
+                to be sealed on ESN. If you need withdrawal on Ethereum urgently, then you can
+                submit the multiple bunches with depths:{' '}
+                {(() => {
+                  const depths = [];
+                  let depth = immediateBunchDepth;
+                  let latestBlock = lastEsnBlockOnEth ?? 0;
+                  while (depth >= 0) {
+                    if (latestBlock + 2 ** depth <= esnLatestBlock) {
+                      depths.push(depth);
+                      latestBlock += 2 ** depth;
+                    }
+                    depth--;
+                    if (latestBlock >= (txBlockNumber ?? 0)) {
+                      break;
+                    }
+                  }
 
-              return depths.join(', ');
-            })()}
-            .
+                  return depths.join(', ');
+                })()}
+                .
+              </>
+            )}
           </Alert>
+        ) : null}
+
+        {lastEsnBlockOnEth !== null &&
+        txBlockNumber !== null &&
+        lastEsnBlockOnEth > txBlockNumber ? (
+          <>
+            <button className="tr-pn-btn" onClick={props.setCurrentStep.bind(null, 3)}>
+              Proceed to generate proof
+            </button>
+          </>
         ) : null}
       </div>
     </div>
