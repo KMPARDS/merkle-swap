@@ -142,14 +142,29 @@ interface WithdrawProof {
   parentNodesTx?: string;
 }
 
-export async function generateWithdrawalProof(txHash: string, overides: WithdrawProof = {}) {
+export async function generateWithdrawalProof(
+  txHash: string,
+  pushLine: (line: { text: string; color: string }) => any,
+  overides: WithdrawProof = {}
+) {
   const gp = new GetProof(window.providerESN.connection.url);
+
+  pushLine({
+    text: 'Loading raw transaction from blockchain...',
+    color: 'white',
+  });
+  const tx = await window.providerESN.getTransaction(txHash);
+
+  pushLine({
+    text: 'Generating transaction merkle patricia proof on eth blockchain...',
+    color: 'white',
+  });
   const txProof = await gp.transactionProof(txHash);
 
-  const tx = await window.providerESN.getTransaction(txHash);
   if (!tx) {
     throw new Error(`${txHash} does not exist on ESN`);
   }
+
   const rawTransaction = ethers.utils.serializeTransaction(
     {
       to: tx.to,
@@ -167,16 +182,35 @@ export async function generateWithdrawalProof(txHash: string, overides: Withdraw
     }
   );
 
+  pushLine({
+    text: 'Loading raw transaction receipt from blockchain...',
+    color: 'white',
+  });
   const receipt = await window.providerESN.getTransactionReceipt(tx.hash);
 
+  pushLine({
+    text: 'Searching for bunch index using binary search algorithm...',
+    color: 'white',
+  });
   const bunchIndex = await getBunchIndex(receipt.blockNumber);
   if (bunchIndex === null) {
     throw new Error('Block is not yet in the bunch');
   }
 
+  pushLine({
+    text: `Tx found in Bunch with index ${bunchIndex}, fetching bunch headers...`,
+    color: 'white',
+  });
   const bunch = await window.plasmaManagerInstanceETH.getBunchHeader(bunchIndex);
-  const block = await window.providerESN.send('eth_getBlockByNumber', [receipt.blockNumber, false]);
+  const block = await window.providerESN.send('eth_getBlockByNumber', [
+    ethers.utils.hexlify(receipt.blockNumber),
+    false,
+  ]);
 
+  pushLine({
+    text: `Preparing proof of bunch inclusion...`,
+    color: 'white',
+  });
   const preparingValues: WithdrawProof = {
     bunchIndex: overides.bunchIndex || ethers.utils.hexlify(bunchIndex),
     blockNumber: overides.blockNumber || ethers.utils.hexlify(receipt.blockNumber),

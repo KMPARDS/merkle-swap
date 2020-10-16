@@ -141,7 +141,7 @@ export function Step3(props: { setCurrentStep: (currentStep: number) => any; txH
         txBlockNumber !== null &&
         lastEsnBlockOnEth > txBlockNumber ? (
           <>
-            <button className="tr-pn-btn" onClick={props.setCurrentStep.bind(null, 3)}>
+            <button className="tr-pn-btn" onClick={props.setCurrentStep.bind(null, 4)}>
               Proceed to generate proof
             </button>
           </>

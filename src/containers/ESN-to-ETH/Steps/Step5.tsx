@@ -3,7 +3,7 @@ import { parseEthersJsError } from 'eraswap-sdk/dist/utils';
 
 export function Step5(props: {
   setCurrentStep: (currentStep: number) => any;
-  depositProof: string;
+  withdrawalProof: string;
 }) {
   const [lines, setLines] = useState<{ text: string; color: string }[]>([]);
   function pushLine(line: { text: string; color: string }) {
@@ -15,19 +15,19 @@ export function Step5(props: {
   useEffect(() => {
     (async () => {
       pushLine({
-        text: 'Please wait submitting proof to FundsManager smart contract on ESN...',
+        text: 'Please wait submitting proof to FundsManager smart contract on ETH...',
         color: 'white',
       });
       try {
         if (!window.wallet) {
           throw new Error('Wallet is not loaded. Please load wallet');
         }
-        const tx = await window.fundsManagerInstanceESN
-          .connect(window.wallet.connect(window.providerESN))
-          .claimDeposit(props.depositProof);
+        const tx = await window.fundsManagerInstanceETH
+          .connect(window.wallet.connect(window.providerETH))
+          .claimWithdrawal(props.withdrawalProof);
         setTxHash(tx.hash);
         pushLine({
-          text: `Tx submitted.. waiting for confirmation`,
+          text: `Tx submitted (${tx.hash}).. waiting for confirmation`,
           color: 'white',
         });
 
@@ -48,7 +48,7 @@ export function Step5(props: {
   return (
     <div className="exchange-box-wht-modal">
       <div className="exchange-container mt20 mb20">
-        <h3 className="main-prf">Step 5: Submit to ESN Reverse Plasma Smart Contract</h3>
+        <h3 className="main-prf">Step 5: Submit to ETH Reverse Plasma Smart Contract</h3>
         <div
           style={{ fontFamily: 'monospace', backgroundColor: '#222e', borderRadius: '5px' }}
           className="p-4"

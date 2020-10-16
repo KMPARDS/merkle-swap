@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { generateDepositProof } from '../../../plasma-utils/proof';
+import { generateWithdrawalProof } from '../../../plasma-utils/proof';
 
 export function Step4(props: {
   setCurrentStep: (currentStep: number) => any;
-  setDepositProof: (depositProof: string) => any;
+  setWithdrawalProof: (withdrawalProof: string) => any;
   txHash: string;
-  depositProof: string | null;
+  withdrawalProof: string | null;
 }) {
   const [lines, setLines] = useState<{ text: string; color: string }[]>([]);
   function pushLine(line: { text: string; color: string }) {
@@ -21,8 +21,8 @@ export function Step4(props: {
         color: 'white',
       });
       try {
-        const proof = await generateDepositProof(props.txHash, pushLine);
-        props.setDepositProof(proof);
+        const proof = await generateWithdrawalProof(props.txHash, pushLine);
+        props.setWithdrawalProof(proof);
         pushLine({
           text: 'Proof ready to be submitted!',
           color: 'green',
@@ -40,7 +40,7 @@ export function Step4(props: {
   return (
     <div className="exchange-box-wht-modal">
       <div className="exchange-container mt20 mb20">
-        <h3 className="main-prf">Step 4: Generate Proof of Deposit</h3>
+        <h3 className="main-prf">Step 4: Generate Proof of Withdrawal</h3>
         <div
           style={{ fontFamily: 'monospace', backgroundColor: '#222e', borderRadius: '5px' }}
           className="p-4"
@@ -68,14 +68,14 @@ export function Step4(props: {
                 }}
                 className="p-4"
               >
-                {props.depositProof}
+                {props.withdrawalProof}
               </div>
             ) : null}
             <button
               className="tr-pn-btn p-1 px-4 mt-2 mx-auto"
               onClick={props.setCurrentStep.bind(null, 5)}
             >
-              Submit the proof to ESN
+              Submit the proof to ETH
             </button>
           </>
         ) : null}

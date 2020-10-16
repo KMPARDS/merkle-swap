@@ -37,15 +37,15 @@ export function StepsModal(props: {
         <Step4
           setCurrentStep={setCurrentStep}
           txHash={txHash}
-          depositProof={depositProof}
-          setDepositProof={setDepositProof}
+          withdrawalProof={depositProof}
+          setWithdrawalProof={setDepositProof}
         />
       ) : (
         <>Tx hash is not set</>
       );
     case 5:
       return depositProof !== null ? (
-        <Step5 setCurrentStep={setCurrentStep} depositProof={depositProof} />
+        <Step5 setCurrentStep={setCurrentStep} withdrawalProof={depositProof} />
       ) : (
         <>depositProof is not set</>
       );
