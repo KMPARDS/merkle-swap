@@ -23,7 +23,7 @@ function App() {
           <Route path="/bunch-submission" exact component={BunchSubmission} />
           <Route path="/eth-to-esn" exact component={ETHtoESN} />
           <Route path="/esn-to-eth" exact component={ESNtoETH} />
-          <Route path="/load-wallet" exact component={LoadWallet} />
+          <Route path="/load-wallet" component={LoadWallet} />
 
           <Route path="/token-exchange" exact component={TokenExchange} />
           <Route path="/transfer" exact component={Transfer} />
