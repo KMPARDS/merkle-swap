@@ -27,7 +27,7 @@ export function Step5(props: {
           .claimDeposit(props.depositProof);
         setTxHash(tx.hash);
         pushLine({
-          text: `Tx submitted.. waiting for confirmation`,
+          text: `Tx submitted (${tx.hash}).. waiting for confirmation`,
           color: 'white',
         });
 
