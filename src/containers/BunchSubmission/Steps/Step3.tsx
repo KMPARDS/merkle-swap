@@ -57,8 +57,25 @@ export function Step3(props: {
               }
 
               setBusy(true);
+              // @ts-ignore
+              const isMetamask = window.wallet.provider?.connection?.url === 'metamask';
+
+              if (isMetamask) {
+                const network = await window.wallet.provider.getNetwork();
+                const desiredChainid = process.env.REACT_APP_ENV === 'production' ? 1 : 4;
+                if (network.chainId !== desiredChainid) {
+                  throw new Error(
+                    `Please hange metamask network to ${
+                      process.env.REACT_APP_ENV === 'production'
+                        ? 'Ethereum mainnet'
+                        : 'Kovan Ethereum'
+                    }`
+                  );
+                }
+              }
+
               const tx = await window.plasmaManagerInstanceETH
-                .connect(window.wallet.connect(window.providerETH))
+                .connect(isMetamask ? window.wallet : window.wallet.connect(window.providerETH))
                 .submitBunchHeader(
                   props.signedBunch.startBlockNumber,
                   props.signedBunch.bunchDepth,
