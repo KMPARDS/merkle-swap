@@ -30,7 +30,7 @@ export class UsingMetamask extends Component<{}, State> {
       if (window.ethereum) {
         // @ts-ignore
         await window.ethereum.send('eth_requestAccounts');
-        const metamaskProvider = new ethers.providers.Web3Provider(window.ethereum);
+        const metamaskProvider = new ethers.providers.Web3Provider(window.ethereum, 'any');
         const network = await metamaskProvider.getNetwork();
         // console.log(network);
         if (network.name === 'homestead') {
