@@ -61,6 +61,9 @@ export class UsingMetamask extends Component<{}, State> {
           // @ts-ignore
           window.wallet = wallet;
 
+          // @ts-ignore
+          window.wallet.isMetamask = true;
+
           setTimeout(async () => {
             this.setState({
               displayScreen: 2,
@@ -90,9 +93,9 @@ export class UsingMetamask extends Component<{}, State> {
                   return (
                     <p>
                       Please wait connecting to metamask... Now Metamask popup should open, click{' '}
-                      <b>Confirm</b> in Metamask to allow it to connect with TimeAlly. If popup did
-                      not open, please click on Metamask to open it (it sometimes ignores connection
-                      requests) or try refreshing this page.
+                      <b>Confirm</b> in Metamask to allow it to connect with MerkleSwap. If popup
+                      did not open, please click on Metamask to open it (it sometimes ignores
+                      connection requests) or try refreshing this page.
                     </p>
                   );
                 case 1:
@@ -100,7 +103,7 @@ export class UsingMetamask extends Component<{}, State> {
                     <div>
                       You are on "
                       {this.state.network !== null ? this.state.network.name : 'Unknown'}" network
-                      in MetaMask, but to use the New TimeAlly you need to connect to the Era Swap
+                      in MetaMask, but to use MerkleSwap you need to connect to the Era Swap
                       Network.
                       <br />
                       To connect to Era Swap Network, follow these steps:{' '}
@@ -114,7 +117,12 @@ export class UsingMetamask extends Component<{}, State> {
                           Network Name: <u>Test EraSwap Network</u>
                         </li>
                         <li>
-                          New RPC Url: <u>https://testnet.eraswap.network</u>
+                          New RPC Url:{' '}
+                          <u>
+                            https://
+                            {process.env.REACT_APP_ENV === 'production' ? 'mainnet' : 'testnet'}
+                            .eraswap.network
+                          </u>
                         </li>
                         <li>
                           Symbol: <u>ES</u>
