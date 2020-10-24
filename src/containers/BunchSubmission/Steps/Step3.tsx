@@ -51,6 +51,7 @@ export function Step3(props: {
         <br />
         <button
           onClick={async () => {
+            setDisplay(null);
             try {
               if (!window.wallet) {
                 throw new Error('Wallet is not loaded');
@@ -58,18 +59,16 @@ export function Step3(props: {
 
               setBusy(true);
               // @ts-ignore
-              const isMetamask = window.wallet.provider?.connection?.url === 'metamask';
+              const isMetamask: boolean = window.wallet.isMetamask;
 
               if (isMetamask) {
+                const correctChainId = process.env.REACT_APP_ENV === 'production' ? 1 : 4;
                 const network = await window.wallet.provider.getNetwork();
-                const desiredChainid = process.env.REACT_APP_ENV === 'production' ? 1 : 4;
-                if (network.chainId !== desiredChainid) {
+                if (network.chainId !== correctChainId) {
                   throw new Error(
-                    `Please hange metamask network to ${
-                      process.env.REACT_APP_ENV === 'production'
-                        ? 'Ethereum mainnet'
-                        : 'Kovan Ethereum'
-                    }`
+                    `Please switch to ${
+                      correctChainId === 1 ? 'Ethereum Mainnet' : 'Rinkeby Network'
+                    } in your Metamask to and try again...`
                   );
                 }
               }

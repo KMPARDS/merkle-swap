@@ -23,20 +23,47 @@ export function Step1(props: {
           <button
             className="tr-pn-btn p-1 px-4"
             onClick={async () => {
+              setDisplay(null);
               setBusy(true);
               try {
                 if (!window.wallet) {
                   throw new Error('Wallet is not there');
                 }
-                const tx = await window.esInstanceETH
-                  .connect(window.wallet.connect(window.providerETH))
-                  .transfer(window.fundsManagerInstanceETH.address, props.amountToESN);
 
-                setDisplay({
-                  message: `Tx sent: ${tx.hash}`,
-                  variant: 'success',
-                });
-                props.setTxHash(tx.hash);
+                // @ts-ignore
+                const isMetamask: boolean = window.wallet.isMetamask;
+
+                if (isMetamask) {
+                  const correctChainId = process.env.REACT_APP_ENV === 'production' ? 1 : 4;
+                  const network = await window.wallet.provider.getNetwork();
+                  if (network.chainId !== correctChainId) {
+                    throw new Error(
+                      `Please switch to ${
+                        correctChainId === 1 ? 'Ethereum Mainnet' : 'Rinkeby Network'
+                      } in your Metamask to and try again...`
+                    );
+                  }
+
+                  const tx = await window.esInstanceETH
+                    .connect(window.wallet)
+                    .transfer(window.fundsManagerInstanceETH.address, props.amountToESN);
+
+                  setDisplay({
+                    message: `Tx sent: ${tx.hash}`,
+                    variant: 'success',
+                  });
+                  props.setTxHash(tx.hash);
+                } else {
+                  const tx = await window.esInstanceETH
+                    .connect(window.wallet.connect(window.providerETH))
+                    .transfer(window.fundsManagerInstanceETH.address, props.amountToESN);
+
+                  setDisplay({
+                    message: `Tx sent: ${tx.hash}`,
+                    variant: 'success',
+                  });
+                  props.setTxHash(tx.hash);
+                }
                 props.setCurrentStep(2);
               } catch (error) {
                 setDisplay({

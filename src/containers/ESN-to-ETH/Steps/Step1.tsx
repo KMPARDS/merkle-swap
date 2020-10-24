@@ -33,7 +33,26 @@ export function Step1(props: {
                 if (!window.wallet) {
                   throw new Error('Wallet is not there');
                 }
-                const tx = await window.wallet.connect(window.providerESN).sendTransaction({
+
+                // @ts-ignore
+                const isMetamask: boolean = window.wallet.isMetamask;
+
+                if (isMetamask) {
+                  const correctChainId = process.env.REACT_APP_ENV === 'production' ? 5197 : 5196;
+                  const network = await window.wallet.provider.getNetwork();
+                  if (network.chainId !== correctChainId) {
+                    throw new Error(
+                      `Please switch to ${
+                        correctChainId === 5197 ? 'Era Swap Alpha Mainnet' : 'Era Swap Test Network'
+                      } in your Metamask to and try again...`
+                    );
+                  }
+                }
+
+                const tx = await (isMetamask
+                  ? window.wallet
+                  : window.wallet.connect(window.providerESN)
+                ).sendTransaction({
                   to: window.fundsManagerInstanceESN.address,
                   value: props.amountToESN,
                 });
@@ -44,6 +63,7 @@ export function Step1(props: {
                 });
                 // props.setTxHash(tx.hash);
                 setTxHashInput(tx.hash);
+
                 // props.setCurrentStep(2);
               } catch (error) {
                 setDisplay({

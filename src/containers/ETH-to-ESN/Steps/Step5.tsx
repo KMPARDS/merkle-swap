@@ -22,8 +22,37 @@ export function Step5(props: {
         if (!window.wallet) {
           throw new Error('Wallet is not loaded. Please load wallet');
         }
+
+        // @ts-ignore
+        const isMetamask: boolean = window.wallet.isMetamask;
+
+        if (isMetamask) {
+          const correctChainId = process.env.REACT_APP_ENV === 'production' ? 5197 : 5196;
+          let network = await window.wallet.provider.getNetwork();
+          if (network.chainId !== correctChainId) {
+            pushLine({
+              text: `Please switch to ${
+                correctChainId === 5197 ? 'Era Swap Alpha Mainnet' : 'Era Swap Test Network'
+              } in your Metamask to continue...`,
+              color: 'orangered',
+            });
+
+            while (1) {
+              await new Promise((res) => setTimeout(res, 500));
+              network = await window.wallet.provider.getNetwork();
+              if (network.chainId === correctChainId) {
+                pushLine({
+                  text: `On the correct network! Proceeding! Check Metamask..`,
+                  color: 'lightgreen',
+                });
+                break;
+              }
+            }
+          }
+        }
+
         const tx = await window.fundsManagerInstanceESN
-          .connect(window.wallet.connect(window.providerESN))
+          .connect(isMetamask ? window.wallet : window.wallet.connect(window.providerESN))
           .claimDeposit(props.depositProof);
         setTxHash(tx.hash);
         pushLine({

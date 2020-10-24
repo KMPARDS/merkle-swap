@@ -22,8 +22,37 @@ export function Step5(props: {
         if (!window.wallet) {
           throw new Error('Wallet is not loaded. Please load wallet');
         }
+
+        // @ts-ignore
+        const isMetamask: boolean = window.wallet.isMetamask;
+
+        if (isMetamask) {
+          const correctChainId = process.env.REACT_APP_ENV === 'production' ? 1 : 4;
+          let network = await window.wallet.provider.getNetwork();
+          if (network.chainId !== correctChainId) {
+            pushLine({
+              text: `Please switch to ${
+                correctChainId === 1 ? 'Ethereum Mainnet' : 'Rinkeby Network'
+              } in your Metamask to continue...`,
+              color: 'orangered',
+            });
+
+            while (1) {
+              await new Promise((res) => setTimeout(res, 500));
+              network = await window.wallet.provider.getNetwork();
+              if (network.chainId === correctChainId) {
+                pushLine({
+                  text: `On the correct network! Proceeding! Check Metamask..`,
+                  color: 'lightgreen',
+                });
+                break;
+              }
+            }
+          }
+        }
+
         const tx = await window.fundsManagerInstanceETH
-          .connect(window.wallet.connect(window.providerETH))
+          .connect(isMetamask ? window.wallet : window.wallet.connect(window.providerETH))
           .claimWithdrawal(props.withdrawalProof);
         setTxHash(tx.hash);
         pushLine({
