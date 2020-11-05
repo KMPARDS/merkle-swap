@@ -4602,10 +4602,10 @@ entities@^2.0.0:
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.0.3.tgz#5c487e5742ab93c15abb5da22759b8590ec03b7f"
   integrity sha512-MyoZ0jgnLvB2X3Lg5HqpFmn1kybDiIfEQmKzTb5apr51Rb+T3KdmMiqa70T+bhGnyv7bQ6WMj2QMHpGMmlrUYQ==
 
-eraswap-sdk@^1.0.6-commit.88934170:
-  version "1.0.6-commit.88934170"
-  resolved "https://registry.yarnpkg.com/eraswap-sdk/-/eraswap-sdk-1.0.6-commit.88934170.tgz#0eaf72addb2f137382983d002ceb658f658cd125"
-  integrity sha512-M+KIq36WRGy2Q1H7HN+mg0ZSKI4L+vIROIB4bfS0+YbYycI7z8t4bjWtR2rXuU90Mr67M1FNXRDqEV4pTkjc3A==
+eraswap-sdk@^2.0.4-commit.db7234f1:
+  version "2.0.4-commit.db7234f1"
+  resolved "https://registry.yarnpkg.com/eraswap-sdk/-/eraswap-sdk-2.0.4-commit.db7234f1.tgz#690c2c1b4da79c4f51f37387d73f8a99c82b1c75"
+  integrity sha512-0Km0NfvA3XoiCrbedoQTvYm3GVRBynjckqLAMqyxHZqhC1DNmiMlaVHCf2La4L4ArBgYZLJQbLqdz7m/bTW5wA==
   dependencies:
     "@types/node" "^14.11.2"
     ethers "^5.0.14"
