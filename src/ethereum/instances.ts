@@ -4,9 +4,9 @@ import { addresses, CustomProvider } from 'eraswap-sdk';
 import {
   Erc20Factory,
   PlasmaManagerFactory,
-  FundsManagerETHFactory,
+  FundsManagerEthFactory,
 } from 'eraswap-sdk/dist/typechain/ETH';
-import { ReversePlasmaFactory, FundsManagerESNFactory } from 'eraswap-sdk/dist/typechain/ESN';
+import { ReversePlasmaFactory, FundsManagerEsnFactory } from 'eraswap-sdk/dist/typechain/ESN';
 
 window.providerETH = new ethers.providers.InfuraProvider(
   process.env.REACT_APP_ENV === 'production' ? 'homestead' : 'rinkeby'
@@ -43,7 +43,7 @@ window.plasmaManagerInstanceETH = PlasmaManagerFactory.connect(
   window.providerETH
 );
 
-window.fundsManagerInstanceETH = FundsManagerETHFactory.connect(
+window.fundsManagerInstanceETH = FundsManagerEthFactory.connect(
   address.fundsManagerETH,
   window.providerETH
 );
@@ -53,7 +53,7 @@ window.reversePlasmaInstanceESN = ReversePlasmaFactory.connect(
   window.providerESN
 );
 
-window.fundsManagerInstanceESN = FundsManagerESNFactory.connect(
+window.fundsManagerInstanceESN = FundsManagerEsnFactory.connect(
   address.fundsManagerESN,
   window.providerESN
 );
