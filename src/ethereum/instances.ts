@@ -29,11 +29,6 @@ const address = {
   fundsManagerETH: addresses[env].ETH.fundsManager,
   reversePlasmaESN: addresses[env].ESN.reversePlasma,
   fundsManagerESN: addresses[env].ESN.fundsManager,
-  // esContractETH: '0x2C94a51e1ffc2a43c3d88B645c3de007eeaccB75',
-  // plasmaManagerETH: '0x7c43dcA5752c59e12B79b605E7C6866E4bCAa4bE',
-  // fundsManagerETH: '0x7BdE3BfbFb22B6237C2145EbF3bACaF55Cd88000',
-  // reversePlasmaESN: '0x3bEb087e33eC0B830325991A32E3F8bb16A51317',
-  // fundsManagerESN: '0xc4cfb05119Ea1F59fb5a8F949288801491D00110',
 };
 
 window.esInstanceETH = Erc20Factory.connect(address.esContractETH, window.providerETH);
