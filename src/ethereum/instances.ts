@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { addresses, CustomProvider } from 'eraswap-sdk';
+import { addresses, CustomJsonRpcProvider } from 'eraswap-sdk';
 
 import {
   Erc20Factory,
@@ -12,9 +12,11 @@ window.providerETH = new ethers.providers.InfuraProvider(
   process.env.REACT_APP_ENV === 'production' ? 'homestead' : 'rinkeby'
 );
 
-window.providerESN = new CustomProvider(
-  process.env.REACT_APP_ENV === 'production' ? 'mainnet' : 'testnet'
-);
+window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
+  name: 'EraSwapNetwork',
+  chainId: 5197,
+  ensAddress: addresses['production'].ESN.kycdapp,
+});
 
 // Temporary wallet
 // if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
