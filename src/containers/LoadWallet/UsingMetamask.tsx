@@ -114,7 +114,7 @@ export class UsingMetamask extends Component<{}, State> {
                           Select <u>Custom RPC</u>.
                         </li>
                         <li>
-                          Network Name: <u>Test EraSwap Network</u>
+                          Network Name: <u>EraSwap Network</u>
                         </li>
                         <li>
                           New RPC Url:{' '}
