@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import { addresses, CustomJsonRpcProvider } from 'eraswap-sdk';
+import { addresses, CustomJsonRpcProvider, CustomProvider } from 'eraswap-sdk';
 
 import {
   Erc20Factory,
@@ -12,11 +12,12 @@ window.providerETH = new ethers.providers.InfuraProvider(
   process.env.REACT_APP_ENV === 'production' ? 'homestead' : 'rinkeby'
 );
 
-window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
-  name: 'EraSwapNetwork',
-  chainId: 5197,
-  ensAddress: addresses['production'].ESN.kycdapp,
-});
+// window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
+//   name: 'EraSwapNetwork',
+//   chainId: 5197,
+//   ensAddress: addresses['production'].ESN.kycdapp,
+// });
+window.providerESN = new CustomProvider('mainnet');
 
 // Temporary wallet
 // if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
@@ -26,11 +27,11 @@ window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network'
 const env = process.env.REACT_APP_ENV ?? 'development';
 
 const address = {
-  esContractETH: addresses[env].ETH.esContract,
-  plasmaManagerETH: addresses[env].ETH.plasmaManager,
-  fundsManagerETH: addresses[env].ETH.fundsManager,
-  reversePlasmaESN: addresses[env].ESN.reversePlasma,
-  fundsManagerESN: addresses[env].ESN.fundsManager,
+  esContractETH: addresses.production.ETH.esContract,
+  plasmaManagerETH: addresses.production.ETH.plasmaManager,
+  fundsManagerETH: addresses.production.ETH.fundsManager,
+  reversePlasmaESN: addresses.production.ESN.reversePlasma,
+  fundsManagerESN: addresses.production.ESN.fundsManager,
 };
 
 window.esInstanceETH = Erc20Factory.connect(address.esContractETH, window.providerETH);

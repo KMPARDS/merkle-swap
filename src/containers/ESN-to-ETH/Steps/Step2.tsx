@@ -22,7 +22,10 @@ export function Step2(props: { setCurrentStep: (currentStep: number) => any; txH
       let receipt: ethers.providers.TransactionReceipt | null = null;
       try {
         // receipt = await window.providerETH.getTransactionReceipt(props.txHash);
+
         const tx = await window.providerESN.getTransaction(props.txHash);
+        console.log({tx});
+
         receipt = await tx.wait();
       } catch {}
 

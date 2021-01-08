@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BigNumber, ethers } from 'ethers';
-import { parseEthersJsError } from 'eraswap-sdk/dist/utils';
-import { Alert, FormControl } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { ethers } from 'ethers';
+import { Alert } from 'react-bootstrap';
 
 export function Step2(props: { setCurrentStep: (currentStep: number) => any; txHash: string }) {
   // const [busy, setBusy] = useState<boolean>(false);
