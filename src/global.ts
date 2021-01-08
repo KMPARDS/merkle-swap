@@ -6,8 +6,8 @@ import { ReversePlasma, FundsManagerEsn } from 'eraswap-sdk/dist/typechain/ESN';
 declare global {
   interface Window {
     providerETH: ethers.providers.InfuraProvider;
-    // providerESN: CustomJsonRpcProvider;
-    providerESN: CustomProvider;
+    providerESN: CustomJsonRpcProvider;
+    // providerESN: CustomProvider;
     wallet: ethers.Wallet | undefined;
     esInstanceETH: Erc20;
     plasmaManagerInstanceETH: PlasmaManager;

@@ -34,7 +34,7 @@ export async function fetchBlocks(
           receiptsRoot: block.receiptsRoot,
         };
 
-        resolve();
+        resolve(true);
       });
     })
   );

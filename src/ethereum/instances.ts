@@ -12,12 +12,12 @@ window.providerETH = new ethers.providers.InfuraProvider(
   process.env.REACT_APP_ENV === 'production' ? 'homestead' : 'rinkeby'
 );
 
-// window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
-//   name: 'EraSwapNetwork',
-//   chainId: 5197,
-//   ensAddress: addresses['production'].ESN.kycdapp,
-// });
-window.providerESN = new CustomProvider('mainnet');
+window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network', {
+  name: 'EraSwapNetwork',
+  chainId: 5197,
+  ensAddress: addresses['production'].ESN.kycdapp,
+});
+// window.providerESN = new CustomProvider('mainnet');
 
 // Temporary wallet
 // if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
