@@ -19,35 +19,28 @@ export async function fetchBlocks(
   const blockNumbersToScan = [...Array(2 ** bunchDepth).keys()].map((n) => n + startBlockNumber);
   const blockArray: BlockCompact[] = new Array(2 ** bunchDepth);
 
-  const promises = [];
   for (let i = 0; i < blockNumbersToScan.length; i++) {
     const currentBlockNumber = blockNumbersToScan[i];
 
-    if (bunchDepth > 14 && i % 250 === 0) {
-      console.log('waiting at ', currentBlockNumber);
-      await delay(1000);
+    if (bunchDepth > 14 && i % 200 === 0) {
+      console.log(`waiting at ${currentBlockNumber}`);
+      await delay(1500);
       console.log('resumed');
     }
 
-    const tmpPromise = new Promise(async function (resolve, reject) {
-      const blockNumberHex = ethers.utils.hexStripZeros(ethers.utils.hexlify(currentBlockNumber));
+    const blockNumberHex = ethers.utils.hexStripZeros(ethers.utils.hexlify(currentBlockNumber));
 
-      const block: ParityBlock = await provider.send('eth_getBlockByNumber', [
-        blockNumberHex,
-        true,
-      ]);
+    const block: ParityBlock = await provider.send('eth_getBlockByNumber', [
+      blockNumberHex,
+      true,
+    ]);
 
-      blockArray[currentBlockNumber - startBlockNumber] = {
-        blockNumber: currentBlockNumber,
-        transactionsRoot: block.transactionsRoot,
-        receiptsRoot: block.receiptsRoot,
-      };
-
-      resolve(true);
-    });
-    promises.push(tmpPromise);
+    blockArray[currentBlockNumber - startBlockNumber] = {
+      blockNumber: currentBlockNumber,
+      transactionsRoot: block.transactionsRoot,
+      receiptsRoot: block.receiptsRoot,
+    };
   }
-  await Promise.all(promises);
 
   return blockArray;
 }
