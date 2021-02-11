@@ -48,10 +48,9 @@ export async function fetchBlocks(
 }
 
 function delay(delayInms: number) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve(2);
     }, delayInms);
   });
 }
-
