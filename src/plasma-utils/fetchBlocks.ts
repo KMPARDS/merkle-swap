@@ -19,7 +19,6 @@ export async function fetchBlocks(
   const blockNumbersToScan = [...Array(2 ** bunchDepth).keys()].map((n) => n + startBlockNumber);
   const blockArray: BlockCompact[] = new Array(2 ** bunchDepth);
 
-  const promises = [];
   for (let i = 0; i < blockNumbersToScan.length; i++) {
     const currentBlockNumber = blockNumbersToScan[i];
 
