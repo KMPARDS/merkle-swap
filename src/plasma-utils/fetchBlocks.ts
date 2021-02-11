@@ -21,7 +21,7 @@ export async function fetchBlocks(
 
   const promises = [];
   for (let i = 0; i < blockNumbersToScan.length; i++) {
-    if (bunchDepth > 14 && i % 1000 === 0) {
+    if (bunchDepth > 14 && i % 250 === 0) {
       console.log('waiting');
       await delay(1000);
       console.log('resumed');
