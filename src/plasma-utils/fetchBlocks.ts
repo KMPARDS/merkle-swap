@@ -18,26 +18,39 @@ export async function fetchBlocks(
 ): Promise<BlockCompact[]> {
   const blockNumbersToScan = [...Array(2 ** bunchDepth).keys()].map((n) => n + startBlockNumber);
   const blockArray: BlockCompact[] = new Array(2 ** bunchDepth);
-  await Promise.all(
-    blockNumbersToScan.map((currentBlockNumber) => {
-      return new Promise(async function (resolve, reject) {
-        const blockNumberHex = ethers.utils.hexStripZeros(ethers.utils.hexlify(currentBlockNumber));
 
-        const block: ParityBlock = await provider.send('eth_getBlockByNumber', [
-          blockNumberHex,
-          true,
-        ]);
+  const promises = [];
+  for (let i = 0; i < blockNumbersToScan.length; i++) {
+    if (bunchDepth > 14 && i % 100 === 0) delay(1000);
 
-        blockArray[currentBlockNumber - startBlockNumber] = {
-          blockNumber: currentBlockNumber,
-          transactionsRoot: block.transactionsRoot,
-          receiptsRoot: block.receiptsRoot,
-        };
+    const currentBlockNumber = blockNumbersToScan[i];
+    const tmpPromise = new Promise(async function (resolve, reject) {
+      const blockNumberHex = ethers.utils.hexStripZeros(ethers.utils.hexlify(currentBlockNumber));
 
-        resolve();
-      });
-    })
-  );
+      const block: ParityBlock = await provider.send('eth_getBlockByNumber', [
+        blockNumberHex,
+        true,
+      ]);
+
+      blockArray[currentBlockNumber - startBlockNumber] = {
+        blockNumber: currentBlockNumber,
+        transactionsRoot: block.transactionsRoot,
+        receiptsRoot: block.receiptsRoot,
+      };
+
+      resolve(true);
+    });
+    promises.push(tmpPromise);
+  }
+  await Promise.all(promises);
 
   return blockArray;
+}
+
+function delay(delayInms: number) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(2);
+    }, delayInms);
+  });
 }

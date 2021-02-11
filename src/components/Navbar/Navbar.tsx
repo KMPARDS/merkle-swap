@@ -50,7 +50,9 @@ export class NavbarMain extends Component<{}, State> {
               {/* <Nav.Link href="#">About</Nav.Link>
                 <Nav.Link href="#">FAQ</Nav.Link> */}
               {/* <Link to="/transactions">Transactions </Link> */}
-              <a href="https://eraswap.info/layerbridge" target="_blank">Transactions</a>
+              <a href="https://eraswap.info/layerbridge" target="_blank">
+                Transactions
+              </a>
               {/* <NavDropdown title="Services" id="collasible-nav-dropdown">
                   <NavDropdown.Item href="#action/3.1">Services</NavDropdown.Item>
                   <NavDropdown.Item href="#action/3.2">Services action</NavDropdown.Item>
