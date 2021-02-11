@@ -21,7 +21,7 @@ export async function fetchBlocks(
 
   const promises = [];
   for (let i = 0; i < blockNumbersToScan.length; i++) {
-    if(i%100 === 0) delay(1000);
+    if (bunchDepth > 14 && i % 100 === 0) delay(1000);
 
     const currentBlockNumber = blockNumbersToScan[i];
     const tmpPromise = new Promise(async function (resolve, reject) {
