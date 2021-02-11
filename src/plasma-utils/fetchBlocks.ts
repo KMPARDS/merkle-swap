@@ -24,8 +24,9 @@ export async function fetchBlocks(
     const currentBlockNumber = blockNumbersToScan[i];
 
     if (bunchDepth > 14 && i % 250 === 0) {
-      console.log('waiting at ', currentBlockNumber);
-      await delay(1000);
+      const delayMs = [1000,2000];
+      console.log(`waiting at ${currentBlockNumber} for ${delayMs[i%2]/1000} seconds`);
+      await delay(delayMs[i%2]);
       console.log('resumed');
     }
 
