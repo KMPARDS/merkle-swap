@@ -21,13 +21,14 @@ export async function fetchBlocks(
 
   const promises = [];
   for (let i = 0; i < blockNumbersToScan.length; i++) {
-    if (bunchDepth > 14 && i % 1000 === 0) {
-      console.log('waiting');
+    const currentBlockNumber = blockNumbersToScan[i];
+
+    if (bunchDepth > 14 && i % 250 === 0) {
+      console.log('waiting at ', currentBlockNumber);
       await delay(1000);
       console.log('resumed');
     }
 
-    const currentBlockNumber = blockNumbersToScan[i];
     const tmpPromise = new Promise(async function (resolve, reject) {
       const blockNumberHex = ethers.utils.hexStripZeros(ethers.utils.hexlify(currentBlockNumber));
 
