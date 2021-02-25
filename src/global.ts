@@ -7,6 +7,8 @@ declare global {
   interface Window {
     providerETH: ethers.providers.InfuraProvider;
     providerESN: CustomJsonRpcProvider;
+    providerESN1: CustomJsonRpcProvider;
+    providerESN2: CustomJsonRpcProvider;
     wallet: ethers.Wallet | undefined;
     esInstanceETH: Erc20;
     plasmaManagerInstanceETH: PlasmaManager;

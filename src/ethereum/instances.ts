@@ -18,6 +18,18 @@ window.providerESN = new CustomJsonRpcProvider('https://mainnet.eraswap.network'
   ensAddress: addresses['production'].ESN.kycdapp,
 });
 
+window.providerESN1 = new CustomJsonRpcProvider('https://node1.mainnet.eraswap.network', {
+  name: 'EraSwapNetwork',
+  chainId: 5197,
+  ensAddress: addresses['production'].ESN.kycdapp,
+});
+
+window.providerESN2 = new CustomJsonRpcProvider('https://rpc-mumbai.mainnet.eraswap.network', {
+  name: 'EraSwapNetwork',
+  chainId: 5197,
+  ensAddress: addresses['production'].ESN.kycdapp,
+});
+
 // Temporary wallet
 // if (process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY) {
 //   window.wallet = new ethers.Wallet(process.env.REACT_APP_TEST_WALLET_PRIVATE_KEY);
