@@ -13,6 +13,7 @@ import { LoadWallet } from './containers/LoadWallet';
 import './App.css';
 
 function App() {
+  console.log('app loaded');
   return (
     <div className="App">
       <BrowserRouter>
