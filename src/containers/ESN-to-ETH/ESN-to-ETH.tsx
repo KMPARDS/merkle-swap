@@ -142,7 +142,7 @@ export class ESNtoETH extends Component<{}, State> {
           backdrop="static"
         >
           <Modal.Header closeButton>
-            <Modal.Title>Convert ERC20 to Native</Modal.Title>
+            <Modal.Title>Convert Native to ERC20</Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
