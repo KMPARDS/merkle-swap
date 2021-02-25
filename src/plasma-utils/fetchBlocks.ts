@@ -28,8 +28,9 @@ export async function fetchBlocks(
       // console.log(`waiting at ${currentBlockNumber}`);
       // await delay(1500);
       // console.log('resumed');
+      console.log(`${(i/blockNumbersToScan.length)*100}% completed`);
       provider = switchProvider(provider);
-      console.log(`switched provider to ${provider.connection.url} at block ${currentBlockNumber}`);
+      console.log(`provider switched to ${provider.connection.url} at block ${currentBlockNumber}`);
     }
 
     const blockNumberHex = ethers.utils.hexStripZeros(ethers.utils.hexlify(currentBlockNumber));
