@@ -62,6 +62,12 @@ export async function fetchBlocks(
 
     promiseArray.push(promise);  
   }
+  
+  //resolving remaining promises
+  console.log(`resolving remaining ${promiseArray.length} calls`);
+  await Promise.all(promiseArray);
+  promiseArray = [];
+  console.log('calls resolution completed');
 
   return blockArray;
 }
