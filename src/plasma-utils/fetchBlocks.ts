@@ -1,5 +1,6 @@
 import { ethers } from 'ethers';
 import { CustomJsonRpcProvider } from 'eraswap-sdk';
+import { GlobalEventEmitter,Events } from '../events';
 
 interface BlockCompact {
   blockNumber: number;
@@ -25,8 +26,8 @@ export async function fetchBlocks(
   for (let i = 0; i < blockNumbersToScan.length; i++) {
     const currentBlockNumber = blockNumbersToScan[i];
 
-    //resolve every 4000 promises
-    if(i%1500 === 0){
+    //resolve every 1200 promises
+    if(i%1200 === 0){
       console.log(`resolving last ${promiseArray.length} calls`);
       await Promise.all(promiseArray);
       promiseArray = [];
@@ -35,7 +36,10 @@ export async function fetchBlocks(
     const promise = (async () => {
       if (bunchDepth > 14) {
         if(i % 200 === 0){
-          console.log(`${(i/blockNumbersToScan.length)*100}% completed`);
+          const percentCompleted = (i/blockNumbersToScan.length)*100;
+          GlobalEventEmitter.dispatch(Events.SET_PROGRESS,percentCompleted);
+
+          console.log(`${percentCompleted}% completed`);
           provider = switchProvider(provider);
           console.log(`provider switched to ${provider.connection.url} at block ${currentBlockNumber}`);
         }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { generateWithdrawalProof } from '../../../plasma-utils/proof';
+import { GlobalEventEmitter,Events } from '../../../events';
+import { ProgressBar } from 'react-bootstrap';
 
 export function Step4(props: {
   setCurrentStep: (currentStep: number) => any;
@@ -12,6 +14,12 @@ export function Step4(props: {
     setLines((l) => [...l, line]);
   }
 
+  const [progress, setProgress] = useState<number>(0);
+  GlobalEventEmitter.subscribe(Events.SET_PROGRESS,progress =>{
+      console.log({progress});
+     setProgress(progress)
+    });
+  
   const [ready, setReady] = useState<boolean>(false);
   const [showProof, setShowProof] = useState<boolean>(false);
   useEffect(() => {
@@ -37,6 +45,7 @@ export function Step4(props: {
     })().catch(console.error);
   }, []);
 
+
   return (
     <div className="exchange-box-wht-modal">
       <div className="exchange-container mt20 mb20">
@@ -48,6 +57,12 @@ export function Step4(props: {
           {lines.map((line) => (
             <p style={{ color: line.color }}>{line.text}</p>
           ))}
+          {progress !== 0 && progress < 100 
+          ?
+            <ProgressBar animated now={progress} />
+            :
+            null
+          }
         </div>
 
         {ready ? (
